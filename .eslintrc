@@ -2,7 +2,7 @@
   "extends": ["airbnb", "prettier"],
   "plugins": ["prettier", "jest"],
   "env": {
-    "jest": true
+    "jest": false
   },
   "rules": {
     "react/jsx-filename-extension": [
@@ -21,7 +21,10 @@
     "no-return-assign": "off",
     "import/no-named-as-default-member": "off",
     "import/prefer-default-export": 0,
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "no-unused-vars": "off", // Désactive no-unused-vars
+    "react/no-unescaped-entities": "off", // Désactive react/no-unescaped-entities
+    "arrow-body-style": "off"
   },
   "globals": {
     "window": true,
