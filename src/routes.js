@@ -6,12 +6,12 @@ import { path } from 'utils/const'
 import Fallback from 'components/Fallback'
 import Spinner from 'components/Spinner'
 
-const Auth = React.lazy(() => import('./pages/auth'))
+/* const Auth = React.lazy(() => import('./pages/auth')) */
 const Dashboard = React.lazy(() => import('./pages/dashboard'))
 
 function Router() {
   const dispatch = useDispatch()
-  const { checked, loggedIn } = useSelector((state) => state.app)
+  const { checked /* loggedIn */ } = useSelector((state) => state.app)
 
   useEffect(() => {
     dispatch(actions.authenticate())
@@ -28,21 +28,12 @@ function Router() {
   return (
     <BrowserRouter>
       <Suspense fallback={<Fallback />}>
-        {!loggedIn ? (
-          <Switch>
-            <Route path="/">
-              <Auth />
-            </Route>
-            <Redirect to="/" />
-          </Switch>
-        ) : (
-          <Switch>
-            <Route path={path.dashboard}>
-              <Dashboard />
-            </Route>
-            <Redirect to={path.dashboard} />
-          </Switch>
-        )}
+        <Switch>
+          <Route path={path.dashboard}>
+            <Dashboard />
+          </Route>
+          <Redirect to={path.dashboard} />
+        </Switch>
       </Suspense>
     </BrowserRouter>
   )
