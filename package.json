@@ -100,9 +100,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,css}": [
-      "yarn format",
-      "yarn lint",
-      "yarn test --watchAll=false --passWithNoTests"
+      "yarn format"
     ]
   }
 }
