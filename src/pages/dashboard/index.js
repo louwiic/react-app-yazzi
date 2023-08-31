@@ -42,7 +42,7 @@ const Dashboard = () => {
               }}
             >
               <button /* eslint-disable react/button-has-type */
-                onClick={() => console.log(' *** click ***')}
+                onClick={() => {}}
                 className={styles.mybutton}
                 type="button"
               >
