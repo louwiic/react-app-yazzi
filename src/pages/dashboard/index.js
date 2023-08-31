@@ -41,11 +41,11 @@ const Dashboard = () => {
                 marginTop: '80px',
               }}
             >
-              <button
+              <button /* eslint-disable react/button-has-type */
                 onClick={() => console.log(' *** click ***')}
                 className={styles.mybutton}
+                type="button"
               >
-                {' '}
                 Et si on se disait oui ?
               </button>
               <div
