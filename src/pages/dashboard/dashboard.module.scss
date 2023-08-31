@@ -10,8 +10,8 @@
 }
 
 .middle {
-  background-color: pink;
   display: flex;
+  flex-direction: column;
 }
 
 .container {
@@ -23,20 +23,98 @@
   padding: rem(50);
 }
 
+.banner {
+  background-color: #00908a;
+}
+
+.containertitle {
+  display: flex;
+  flex-direction: column;
+}
+
+.logocontainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.imgheart {
+  display: flex;
+  align-self: flex-end;
+}
 .titlebloc {
   font-size: 70px;
   font-family: 'Playfair Display', 'Arial Narrow', Arial, sans-serif;
   font-weight: 700;
   text-align: center;
+  color: #00908a;
+  margin-top: 30;
+}
+.subtitlebloc {
+  font-size: 52;
+  font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 400;
+  text-align: center;
+  color: #303030;
+  display: block;
+}
+.subtitleblocbis {
+  font-size: 52;
+  font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
+  font-weight: bold;
+  text-align: center;
+  color: #303030;
+  display: block;
 }
 
 .bgcontainer {
+  display: flex;
+  flex: 1;
   position: relative;
-  width: 100%;
-  height: 100vh; /* Ajustez la hauteur selon vos besoins */
+
   background-image: url('/assets/images/BG.png');
   background-size: cover;
   background-position: center;
+  justify-content: center;
+}
+
+.asiderigthcontainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.buttonContainer {
+  align-self: center;
+  display: flex;
+
+  flex-direction: row;
+}
+.mybutton {
+  width: 393px;
+  height: 88px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #dfb693; /* Vous pouvez définir la couleur de fond souhaitée ici */
+  border: none;
+  cursor: pointer;
+  font-size: 72;
+  font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 600;
+  color: '#ffffff';
+  display: flex;
+  color: white;
+}
+
+.arrow {
+  display: flex;
+  background-color: orangered;
+  position: relative;
+  align-self: flex-end;
+  margin-top: 90;
+}
+.arrowleft {
 }
 
 .greeting {
@@ -64,25 +142,6 @@
 .logo {
   width: rem(160);
   height: rem(160);
-}
-
-.buttonContainer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 50%;
-  max-width: rem(480);
-  margin-top: rem(120);
-  @include phone {
-    width: 100%;
-    max-width: 100%;
-    margin: rem(120) rem(16);
-  }
-}
-
-.download {
-  width: 45%;
-  height: rem(50);
 }
 
 .logout {
