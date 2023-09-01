@@ -5,4 +5,5 @@ export const path = {
   resetPassword: '/reset-password',
   confirmEmail: '/confirm-email',
   dashboard: '/dashboard',
+  template: '/template',
 }
