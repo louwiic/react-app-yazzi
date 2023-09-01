@@ -12,14 +12,12 @@ import {
   Button,
 } from 'reactstrap'
 import { useHistory } from 'react-router-dom'
-
+import { path } from 'utils/const'
 import styles from './templates.module.scss'
 
 const ButtonView = () => {
   const handleButtonClick = () => {
-    /* eslint-disable no-alert */ // Désactive la règle ESLint pour cette ligne
-    console.log('Bouton cliqué !') // Affiche une alerte lorsque le bouton est cliqué
-    /* eslint-enable no-alert */ // Réactive la règle ESLint
+    console.log('Bouton cliqué !')
   }
   return (
     <button
@@ -35,19 +33,14 @@ const ButtonView = () => {
   )
 }
 
-const Back = () => {
-  const history = useHistory()
-  /* const handleGoBack = () => {
-    console.log(' *** test ***')
-  }
- */
+const Back = ({ history }) => {
   return (
     <div className={styles.containerback}>
       <div className="d-flex flex-direction-row align-items-center">
         <button
           type="button"
           onClick={() => {
-            console.log('test')
+            history.goBack()
           }}
           className={styles.back}
         >
@@ -71,14 +64,11 @@ const Back = () => {
 }
 
 const handleButtonClick = () => {
-  /* eslint-disable no-alert */ // Désactive la règle ESLint pour cette ligne
-  console.log('Bouton cliqué !') // Affiche une alerte lorsque le bouton est cliqué
-  /* eslint-enable no-alert */ // Réactive la règle ESLint
+  console.log('Bouton cliqué !')
 }
 
 const Dashboard = () => {
-  /* const dispatch = useDispatch() */
-  /*  const { me } = useSelector((state) => state.app) */
+  const history = useHistory()
 
   return (
     <div className={`${styles.container} App`}>
@@ -87,10 +77,7 @@ const Dashboard = () => {
       </div>
 
       <Container>
-        <Button className={styles.back} onClick={handleButtonClick}>
-          Cliquez-moi
-        </Button>
-        <Back />
+        <Back history={history} />
         <div className={styles.containertitle}>
           <h1 className={styles.titlebloc}>
             Sélectionnez votre template de site
