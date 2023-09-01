@@ -26,6 +26,8 @@
     "react/no-unescaped-entities": "off", // Désactive react/no-unescaped-entities
     "arrow-body-style": "off",
     "no-console": "off",
+
+    "react/jsx-curly-brace-presence": "off",
     "no-restricted-syntax": [
       "error",
       {

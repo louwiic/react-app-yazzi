@@ -124,7 +124,9 @@
   flex-direction: row;
 }
 .mybutton {
-  width: 214px;
+  /* width: 214px; */
+  padding-left: 10px;
+  padding-right: 10px;
   height: 56px;
   border-radius: 16px;
   display: flex;

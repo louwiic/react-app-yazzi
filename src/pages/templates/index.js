@@ -1,33 +1,17 @@
-import { useDispatch, useSelector } from 'react-redux'
+import PreviewWindow from 'components/IFrame'
+import { Col, Container, Row } from 'reactstrap'
 import { images } from 'theme'
-import {
-  Container,
-  Row,
-  Col,
-  Navbar,
-  Nav,
-  NavItem,
-  NavLink,
-  Jumbotron,
-  Button,
-} from 'reactstrap'
+
+import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { path } from 'utils/const'
 import styles from './templates.module.scss'
 
-const ButtonView = () => {
-  const handleButtonClick = () => {
-    console.log('Bouton cliqué !')
-  }
+const ButtonView = ({ text, onClick }) => {
   return (
-    <button
-      onClick={handleButtonClick}
-      className={styles.mybutton}
-      type="button"
-    >
+    <button onClick={onClick} className={styles.mybutton} type="button">
       <div style={{}}>
         <img src={images.eye} alt="eye" />
-        <span className={styles.buttontext}>Prévisualiser</span>
+        <span className={styles.buttontext}>{text || 'Prévisualiser'}</span>
       </div>
     </button>
   )
@@ -63,12 +47,20 @@ const Back = ({ history }) => {
   )
 }
 
-const handleButtonClick = () => {
-  console.log('Bouton cliqué !')
-}
-
 const Dashboard = () => {
   const history = useHistory()
+  const [showPreview, setShowPreview] = useState(false)
+  const [previewUrl, setPreviewUrl] = useState('')
+
+  const handleOpenPreview = (url) => {
+    setPreviewUrl(url)
+    setShowPreview(true)
+  }
+
+  const handleClosePreview = () => {
+    setShowPreview(false)
+    setPreviewUrl('')
+  }
 
   return (
     <div className={`${styles.container} App`}>
@@ -78,11 +70,23 @@ const Dashboard = () => {
 
       <Container>
         <Back history={history} />
+        {/* Affichage de la prévisualisation */}
+
         <div className={styles.containertitle}>
           <h1 className={styles.titlebloc}>
             Sélectionnez votre template de site
           </h1>
         </div>
+        {showPreview && (
+          <>
+            <ButtonView
+              text={'Choisir un autre template'}
+              onClick={handleClosePreview}
+              link=""
+            />
+            <PreviewWindow url={previewUrl} />
+          </>
+        )}
 
         <Row className={styles.row}>
           <Col lg="3" md={6} className={styles.col}>
@@ -95,7 +99,12 @@ const Dashboard = () => {
             >
               <img src={images.mockuprosaly} alt="img_heart" />
               <span className={styles.titlebutton}>Rosaly</span>
-              <ButtonView />
+              <ButtonView
+                onClick={() =>
+                  handleOpenPreview('https://yazzievent.com/template-rosaly/')
+                }
+                link="https://yazzievent.com/template-rosaly/"
+              />
             </div>
           </Col>
           <Col lg="3" md={6} className={styles.col}>
@@ -108,7 +117,11 @@ const Dashboard = () => {
             >
               <img src={images.mockeupsky1} alt="img_heart" />
               <span className={styles.titlebutton}>Sky</span>
-              <ButtonView />
+              <ButtonView
+                onClick={() =>
+                  handleOpenPreview('https://yazzievent.com/template-sky/')
+                }
+              />
             </div>
           </Col>
 
@@ -122,7 +135,11 @@ const Dashboard = () => {
             >
               <img src={images.mockupnaturally1} alt="img_heart" />
               <span className={styles.titlebutton}>Naturally</span>
-              <ButtonView />
+              <ButtonView
+                onClick={() =>
+                  handleOpenPreview('https://yazzievent.com/template-naturaly/')
+                }
+              />
             </div>
           </Col>
           <Col lg="3" md={6} className={styles.col}>
@@ -135,7 +152,11 @@ const Dashboard = () => {
             >
               <img src={images.mockupgolden1} alt="img_heart" />
               <span className={styles.titlebutton}>Golden</span>
-              <ButtonView />
+              <ButtonView
+                onClick={() =>
+                  handleOpenPreview('https://yazzievent.com/template-golden/')
+                }
+              />
             </div>
           </Col>
         </Row>
