@@ -24,7 +24,15 @@
     "react/react-in-jsx-scope": "off",
     "no-unused-vars": "off", // Désactive no-unused-vars
     "react/no-unescaped-entities": "off", // Désactive react/no-unescaped-entities
-    "arrow-body-style": "off"
+    "arrow-body-style": "off",
+    "no-console": "off",
+    "no-restricted-syntax": [
+      "error",
+      {
+        "selector": "CallExpression[callee.object.name='console'][callee.property.name!=/^(log|warn|error|info|trace)$/]",
+        "message": "Unexpected property on console object was called"
+      }
+    ]
   },
   "globals": {
     "window": true,

@@ -1,15 +1,14 @@
-import { useHistory } from 'react-router-dom'
-import { Col, Row } from 'reactstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import { Button, Col, Row } from 'reactstrap'
 import { images } from 'theme'
-import { path } from 'utils/const'
-import styles from './dashboard.module.scss'
+import styles from './templates.module.scss'
 
 const Dashboard = () => {
   /* const dispatch = useDispatch() */
   /*  const { me } = useSelector((state) => state.app) */
-  const history = useHistory()
+
   return (
-    <div className={`${styles.bgcontainer} App`}>
+    <div fluid className={`${styles.bgcontainer} App`}>
       <Row style={{}}>
         <Col xs={12} md={2} style={{}}>
           <div className={styles.logocontainer}>
@@ -23,17 +22,10 @@ const Dashboard = () => {
                 <img src={images.hearts1} alt="img_heart" />
               </div>
               <h1 className={styles.titlebloc}>
-                Site de faire-part digital entièrement personnalisé
+                Sélectionnez votre template de site
               </h1>
             </div>
-            <div style={{ marginTop: 20 }}>
-              <span className={styles.subtitlebloc}>
-                Plus simple | Écologique | Unique
-              </span>
-              <span className={styles.subtitleblocbis}>
-                Gérer votre liste d’invités en toute tranquillité
-              </span>
-            </div>
+
             <div
               style={{
                 display: 'flex',
@@ -44,7 +36,7 @@ const Dashboard = () => {
             >
               <button
                 onClick={() => {
-                  history.push(path.template)
+                  console.log(' *** ok ***')
                 }}
                 className={styles.mybutton}
                 type="button"
@@ -53,16 +45,6 @@ const Dashboard = () => {
                   Et si on se disait oui ?
                 </span>
               </button>
-              <div className={styles.arrowContainer}>
-                <div>
-                  <img src={images.arrowleft} alt="img_heart" />
-                </div>
-                <div>
-                  <span className={styles.arrowtext}>
-                    en moins de 5 minutes !
-                  </span>
-                </div>
-              </div>
             </div>
           </div>
         </Col>

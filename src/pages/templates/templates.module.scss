@@ -14,13 +14,9 @@
   flex-direction: column;
 }
 
-.container {
-  flex: 1;
+.row {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: rem(50);
+  margin-top: 64px;
 }
 
 .banner {
@@ -30,6 +26,7 @@
 .containertitle {
   display: flex;
   flex-direction: column;
+  margin-top: 15px;
 }
 
 .logocontainer {
@@ -38,50 +35,81 @@
   justify-content: center;
   margin-top: 30px;
 }
+.containerback {
+  display: flex;
+  margin-top: 48px;
+  flex-direction: column;
+}
+
+.flower {
+  position: absolute;
+  right: 0;
+}
+
+.back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70px;
+  width: 70px;
+  background-color: #00908a;
+  border-radius: 16px;
+}
+
+.backtext {
+  margin-left: 24px;
+  color: #00908a;
+}
+
 .imgheart {
   display: flex;
   align-self: flex-end;
 }
 .titlebloc {
-  font-size: 70px;
+  font-size: 50px;
   font-family: 'Playfair Display', 'Arial Narrow', Arial, sans-serif;
   font-weight: 700;
-  text-align: center;
   color: #00908a;
   margin-top: 30;
 }
 
+.titlebutton {
+  font-size: 35px;
+  font-family: 'Playfair Display', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 600;
+  line-height: 47.25px;
+  text-align: center;
+  color: #255866;
+}
 /* Media query pour les smartphones */
 @media (max-width: 768px) {
   .titlebloc {
     font-size: 40px;
   }
+  .col {
+    margin-top: 40px;
+  }
 }
 
-.subtitlebloc {
-  font-size: 52;
-  font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
-  font-weight: 400;
-  text-align: center;
-  color: #303030;
-  display: block;
-}
-.subtitleblocbis {
-  font-size: 52;
-  font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
-  font-weight: bold;
-  text-align: center;
-  color: #303030;
-  display: block;
+@media (min-width: 960px) and (max-width: 1024px) {
+  .col {
+    margin-top: 40px;
+  }
 }
 
-.bgcontainer {
-  display: flex;
-  flex: 1;
+@media (min-width: 768px) and (max-width: 959px) {
+  /* Vos styles pour les tablettes en mode portrait ici */
+  .col {
+    margin-top: 40px;
+  }
+}
+
+.container {
   background-image: url('/assets/images/BG.png');
   background-size: cover;
-  background-position: center;
-  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  z-index: -1; /* Assurez-vous que l'image est en arrière-plan */
 }
 
 .asiderigthcontainer {
@@ -96,8 +124,8 @@
   flex-direction: row;
 }
 .mybutton {
-  width: 393px;
-  height: 88px;
+  width: 214px;
+  height: 56px;
   border-radius: 16px;
   display: flex;
   flex-direction: column;
@@ -106,43 +134,20 @@
   background-color: #dfb693; /* Vous pouvez définir la couleur de fond souhaitée ici */
   border: none;
   cursor: pointer;
-  font-size: 72;
-  font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
-  font-weight: 600;
-  color: '#ffffff';
-  display: flex;
-  color: white;
-}
-
-.arrow {
-  display: flex;
-  background-color: orangered;
-  position: relative;
-  align-self: flex-end;
-  margin-top: 90;
-}
-
-.arrowContainer {
-  display: flex;
-  flex-direction: column;
-  margin-top: 30px;
-  margin-left: 20px;
-  align-items: center;
-}
-.arrowleft {
-}
-.arrowtext {
-  font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
-  font-weight: 600;
-  color: #00908a;
   font-size: 18px;
+  font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 600;
+  margin-top: 48px;
+  color: white;
+  align-self: center;
 }
 
 .buttontext {
   font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
   font-weight: 600;
   color: white;
-  font-size: 25px;
+  font-size: 18px;
+  margin-left: 10px;
 }
 
 .greeting {
