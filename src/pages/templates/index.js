@@ -17,6 +17,14 @@ const ButtonView = ({ text, onClick }) => {
   )
 }
 
+const ButtonShow = ({ text, onClick }) => {
+  return (
+    <button onClick={onClick} className={styles.mybuttonshow} type="button">
+      <img src={images.eye} alt="eye" />
+    </button>
+  )
+}
+
 const Back = ({ history }) => {
   return (
     <div className={styles.containerback}>
@@ -47,14 +55,99 @@ const Back = ({ history }) => {
   )
 }
 
+const TemplateOffer = ({ handleOpenPreview }) => {
+  return (
+    <Row className={styles.row}>
+      <Col lg="3" md={6} className={styles.col}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            flex: 1,
+          }}
+        >
+          <img src={images.mockuprosaly} alt="img_heart" />
+          <span className={styles.titlebutton}>Rosaly</span>
+          <ButtonView
+            onClick={() =>
+              handleOpenPreview('https://yazzievent.com/template-rosaly/')
+            }
+            link="https://yazzievent.com/template-rosaly/"
+          />
+        </div>
+      </Col>
+      <Col lg="3" md={6} className={styles.col}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            flex: 1,
+          }}
+        >
+          <img src={images.mockeupsky1} alt="img_heart" />
+          <span className={styles.titlebutton}>Sky</span>
+          <ButtonView
+            onClick={() =>
+              handleOpenPreview('https://yazzievent.com/template-sky/')
+            }
+          />
+        </div>
+      </Col>
+
+      <Col lg="3" md={6} className={styles.col}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            flex: 1,
+          }}
+        >
+          <img src={images.mockupnaturally1} alt="img_heart" />
+          <span className={styles.titlebutton}>Naturally</span>
+          <ButtonView
+            onClick={() =>
+              handleOpenPreview('https://yazzievent.com/template-naturaly/')
+            }
+          />
+        </div>
+      </Col>
+      <Col lg="3" md={6} className={styles.col}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            flex: 1,
+          }}
+        >
+          <img src={images.mockupgolden1} alt="img_heart" />
+          <span className={styles.titlebutton}>Golden</span>
+          <ButtonView
+            onClick={() =>
+              handleOpenPreview('https://yazzievent.com/template-golden/')
+            }
+          />
+        </div>
+      </Col>
+    </Row>
+  )
+}
+
 const Dashboard = () => {
   const history = useHistory()
   const [showPreview, setShowPreview] = useState(false)
   const [previewUrl, setPreviewUrl] = useState('')
+  const [loading, setLoadging] = useState(false)
 
   const handleOpenPreview = (url) => {
-    setPreviewUrl(url)
-    setShowPreview(true)
+    setPreviewUrl('')
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
+    setTimeout(() => {
+      setPreviewUrl(url)
+      setShowPreview(true)
+    }, 400)
   }
 
   const handleClosePreview = () => {
@@ -67,104 +160,109 @@ const Dashboard = () => {
       <div className={styles.flower}>
         <img src={images.leaf} alt="eye" />
       </div>
+      {showPreview && (
+        <>
+          <Row>
+            <Col md={9}>
+              <PreviewWindow url={previewUrl} />
+            </Col>
+            <Col md={3}>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
+              >
+                <img
+                  src={images.mockuprosaly}
+                  alt="img_heart"
+                  style={{ backgroundColor: 'InfoBackground' }}
+                />
+                <ButtonShow
+                  text="Changer de template"
+                  onClick={() =>
+                    handleOpenPreview('https://yazzievent.com/template-rosaly/')
+                  }
+                  link=""
+                />
+              </div>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  marginTop: 40,
+                }}
+              >
+                <img
+                  src={images.mockeupsky1}
+                  alt="img_heart"
+                  style={{ backgroundColor: 'InfoBackground' }}
+                />
+                <ButtonShow
+                  text="Changer de template"
+                  onClick={() =>
+                    handleOpenPreview('https://yazzievent.com/template-sky/')
+                  }
+                  link=""
+                />
+              </div>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  marginTop: 40,
+                }}
+              >
+                <img
+                  src={images.mockupnaturally1}
+                  alt="img_heart"
+                  style={{ backgroundColor: 'InfoBackground' }}
+                />
+                <ButtonShow
+                  text="Changer de template"
+                  onClick={() =>
+                    handleOpenPreview(
+                      'https://yazzievent.com/template-naturaly/',
+                    )
+                  }
+                  link=""
+                />
+              </div>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  marginTop: 40,
+                }}
+              >
+                <img
+                  src={images.mockupgolden1}
+                  alt="img_heart"
+                  style={{ backgroundColor: 'InfoBackground' }}
+                />
+                <ButtonShow
+                  text="Changer de template"
+                  onClick={() =>
+                    handleOpenPreview('https://yazzievent.com/template-golden/')
+                  }
+                  link=""
+                />
+              </div>
+            </Col>
+          </Row>
+        </>
+      )}
 
-      <Container>
-        <Back history={history} />
-        {/* Affichage de la prévisualisation */}
+      <Back history={history} />
+      {/* Affichage de la prévisualisation */}
 
-        <div className={styles.containertitle}>
-          <h1 className={styles.titlebloc}>
-            Sélectionnez votre template de site
-          </h1>
-        </div>
-        {showPreview && (
-          <>
-            <ButtonView
-              text={'Choisir un autre template'}
-              onClick={handleClosePreview}
-              link=""
-            />
-            <PreviewWindow url={previewUrl} />
-          </>
-        )}
+      <div className={styles.containertitle}>
+        <h1 className={styles.titlebloc}>
+          Sélectionnez votre template de site
+        </h1>
+      </div>
 
-        <Row className={styles.row}>
-          <Col lg="3" md={6} className={styles.col}>
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                flex: 1,
-              }}
-            >
-              <img src={images.mockuprosaly} alt="img_heart" />
-              <span className={styles.titlebutton}>Rosaly</span>
-              <ButtonView
-                onClick={() =>
-                  handleOpenPreview('https://yazzievent.com/template-rosaly/')
-                }
-                link="https://yazzievent.com/template-rosaly/"
-              />
-            </div>
-          </Col>
-          <Col lg="3" md={6} className={styles.col}>
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                flex: 1,
-              }}
-            >
-              <img src={images.mockeupsky1} alt="img_heart" />
-              <span className={styles.titlebutton}>Sky</span>
-              <ButtonView
-                onClick={() =>
-                  handleOpenPreview('https://yazzievent.com/template-sky/')
-                }
-              />
-            </div>
-          </Col>
-
-          <Col lg="3" md={6} className={styles.col}>
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                flex: 1,
-              }}
-            >
-              <img src={images.mockupnaturally1} alt="img_heart" />
-              <span className={styles.titlebutton}>Naturally</span>
-              <ButtonView
-                onClick={() =>
-                  handleOpenPreview('https://yazzievent.com/template-naturaly/')
-                }
-              />
-            </div>
-          </Col>
-          <Col lg="3" md={6} className={styles.col}>
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                flex: 1,
-              }}
-            >
-              <img src={images.mockupgolden1} alt="img_heart" />
-              <span className={styles.titlebutton}>Golden</span>
-              <ButtonView
-                onClick={() =>
-                  handleOpenPreview('https://yazzievent.com/template-golden/')
-                }
-              />
-            </div>
-          </Col>
-        </Row>
-
-        {/*     <footer className="footer">
-          <p>© Company 2017</p>
-        </footer> */}
-      </Container>
+      <TemplateOffer handleOpenPreview={handleOpenPreview} />
     </div>
   )
 }
