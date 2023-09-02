@@ -9,6 +9,7 @@ import Spinner from 'components/Spinner'
 /* const Auth = React.lazy(() => import('./pages/auth')) */
 const Dashboard = React.lazy(() => import('./pages/dashboard'))
 const Templates = React.lazy(() => import('./pages/templates'))
+const Packs = React.lazy(() => import('./pages/pack'))
 
 function Router() {
   const dispatch = useDispatch()
@@ -59,6 +60,9 @@ function Router() {
           </Route>
           <Route path={path.template}>
             <Templates />
+          </Route>
+          <Route path={path.packs}>
+            <Packs />
           </Route>
           <Redirect to={path.dashboard} />
         </Switch>

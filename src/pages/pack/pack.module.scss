@@ -28,7 +28,12 @@
   flex-direction: column;
   margin-top: 15px;
 }
-
+.titlecheck {
+  font-size: 25px;
+  font-family: 'Playfair Display', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 700;
+  color: #255866;
+}
 .logocontainer {
   display: flex;
   align-items: center;
@@ -39,6 +44,30 @@
   display: flex;
   margin-top: 48px;
   flex-direction: column;
+}
+
+.containercheck {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-top: 1px solid #30303020; /* Bordure en haut */
+  border-bottom: 1px solid #30303020; /* Bordure en bas */
+  margin-left: 32px;
+  margin-right: 32px;
+  padding-bottom: 24px;
+  padding-top: 18px;
+  margin-top: 24px;
+}
+
+.contentcheck {
+  display: flex;
+  height: 40px;
+  width: 40px;
+  background-color: #00908a;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  margin-top: 24px;
 }
 
 .flower {
@@ -113,6 +142,7 @@
   display: flex;
   flex: 1;
   flex-direction: column;
+  margin-bottom: 96px;
 }
 
 .asiderigthcontainer {
@@ -145,6 +175,7 @@
   margin-top: 48px;
   color: white;
   align-self: center;
+  margin-bottom: 20px;
 }
 
 .mybuttonshow {
