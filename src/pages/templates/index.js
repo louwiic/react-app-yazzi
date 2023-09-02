@@ -1,16 +1,17 @@
 import PreviewWindow from 'components/IFrame'
 import { Col, Container, Row } from 'reactstrap'
 import { images } from 'theme'
+import { path } from 'utils/const'
 
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import styles from './templates.module.scss'
 
-const ButtonView = ({ text, onClick }) => {
+const ButtonView = ({ text, onClick, showIcon = true }) => {
   return (
     <button onClick={onClick} className={styles.mybutton} type="button">
       <div style={{}}>
-        <img src={images.eye} alt="eye" />
+        {showIcon && <img src={images.eye} alt="eye" />}
         <span className={styles.buttontext}>{text || 'Prévisualiser'}</span>
       </div>
     </button>
@@ -132,14 +133,19 @@ const TemplateOffer = ({ handleOpenPreview }) => {
   )
 }
 
-const Dashboard = () => {
+const Template = () => {
   const history = useHistory()
   const [showPreview, setShowPreview] = useState(false)
   const [previewUrl, setPreviewUrl] = useState('')
   const [loading, setLoadging] = useState(false)
 
-  const handleOpenPreview = (url) => {
+  const handleClosePreview = () => {
+    setShowPreview(false)
     setPreviewUrl('')
+  }
+
+  const handleOpenPreview = (url, number) => {
+    handleClosePreview()
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
@@ -148,11 +154,6 @@ const Dashboard = () => {
       setPreviewUrl(url)
       setShowPreview(true)
     }, 400)
-  }
-
-  const handleClosePreview = () => {
-    setShowPreview(false)
-    setPreviewUrl('')
   }
 
   return (
@@ -164,9 +165,17 @@ const Dashboard = () => {
         <>
           <Row>
             <Col md={9}>
-              <PreviewWindow url={previewUrl} />
+              {showPreview && <PreviewWindow url={previewUrl} />}
             </Col>
             <Col md={3}>
+              <ButtonView
+                onClick={() => {
+                  history.push(path.packs)
+                }}
+                link="https://yazzievent.com/template-rosaly/"
+                text="Choisir ce template"
+                showIcon={false}
+              />
               <div
                 style={{
                   display: 'flex',
@@ -201,7 +210,7 @@ const Dashboard = () => {
                 <ButtonShow
                   text="Changer de template"
                   onClick={() =>
-                    handleOpenPreview('https://yazzievent.com/template-sky/')
+                    handleOpenPreview('https://yazzievent.com/template-sky/', 2)
                   }
                   link=""
                 />
@@ -267,7 +276,7 @@ const Dashboard = () => {
   )
 }
 
-Dashboard.propTypes = {}
-Dashboard.defaultProps = {}
+Template.propTypes = {}
+Template.defaultProps = {}
 
-export default Dashboard
+export default Template

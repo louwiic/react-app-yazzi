@@ -11,6 +11,8 @@ import mockuprosaly from 'assets/images/mockuprosaly.png'
 import eye from 'assets/images/eye.png'
 import leaf from 'assets/images/leaf.png'
 import arrowback from 'assets/images/arrowback.png'
+import check from 'assets/images/check.png'
+import nocheck from 'assets/images/no_check.png'
 
 export const images = {
   logo,
@@ -25,6 +27,8 @@ export const images = {
   eye,
   leaf,
   arrowback,
+  check,
+  nocheck,
 }
 
 export default {}

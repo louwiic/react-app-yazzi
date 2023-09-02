@@ -6,4 +6,5 @@ export const path = {
   confirmEmail: '/confirm-email',
   dashboard: '/dashboard',
   template: '/template',
+  packs: '/packs',
 }

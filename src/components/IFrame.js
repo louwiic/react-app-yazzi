@@ -7,26 +7,25 @@ const PreviewWindow = ({ url: urlProps }) => {
   const [url, setUrl] = useState(urlProps)
   const [loading, setLoading] = useState(false)
   const [cachedPages, setCachedPages] = useState({})
-  useEffect(() => {
-    setLoading(true)
-
-    if (cachedPages[url]) {
-      /*  Utiliser la page en cache */
-      iframeRef.current.contentWindow.location.replace(cachedPages[url])
-    } else {
-      setUrl(urlProps)
-      iframeRef.current.src = urlProps
-    }
-  }, [urlProps, cachedPages])
+  const [iframeReady, setIframeReady] = useState(false)
 
   const handleLoad = () => {
     setLoading(false)
-    /*  Mettre en cache la page chargée */
-    setCachedPages((prevCachedPages) => ({
-      ...prevCachedPages,
-      [url]: iframeRef.current.contentWindow.location.href,
-    }))
   }
+
+  useEffect(() => {
+    setIframeReady(true)
+  }, [urlProps])
+
+  useEffect(() => {
+    iframeRef.current.src = 'https://www.monfairepart.com/'
+
+    setTimeout(() => {
+      setLoading(true) // Démarrez le chargement
+      setUrl(urlProps)
+      iframeRef.current.src = urlProps
+    }, 400)
+  }, [urlProps, cachedPages])
 
   return (
     <div className="preview-window" style={{ marginTop: 20 }}>
