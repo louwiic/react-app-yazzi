@@ -1,14 +1,18 @@
 import { images } from 'theme'
 import 'react-step-progress-bar/styles.css'
+import { path } from 'utils/const'
 import { ProgressBar, Step } from 'react-step-progress-bar'
-import { useState } from 'react'
+import { useOfferContext } from 'context/offerContext'
+import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import styles from './custompack.module.scss'
 
-const ButtonShow = ({ text, onClick }) => {
+const ButtonView = ({ text, onClick, classeTextButton, className }) => {
   return (
-    <button onClick={onClick} className={styles.mybuttonshow} type="button">
-      <img src={images.eye} alt="eye" />
+    <button onClick={onClick} className={className} type="button">
+      <div style={{}}>
+        <span className={classeTextButton}>{text || 'Prévisualiser'}</span>
+      </div>
     </button>
   )
 }
@@ -77,6 +81,11 @@ const CustomPack = () => {
   const [offer1, setOffer1] = useState(20)
   const [offer2, setOffer2] = useState(16)
   const [offer3, setOffer3] = useState(20)
+  const { myObject, updateMyObject } = useOfferContext()
+
+  useEffect(() => {
+    console.log(' *** myObject ***', myObject)
+  }, [myObject])
 
   const offers = [
     {
@@ -181,7 +190,6 @@ const CustomPack = () => {
   }
 
   const handleSelect = (percent, offerSelected) => {
-    console.log(' *** offerSelected ***', offerSelected?.key)
     if (offerSelected?.key === 'offer1') {
       setOffer1(percent)
     }
@@ -193,6 +201,25 @@ const CustomPack = () => {
     }
   }
 
+  const handleSelectOptions = () => {
+    const selectedOptions = {}
+
+    // Parcourir chaque valeur reçue (offer1, offer2, offer3)
+    ;[offer1, offer2, offer3].forEach((selectedPercent, index) => {
+      // Utiliser la fonction map pour obtenir une liste d'options correspondantes
+      const optionsForValue = offers[index].data
+        .filter((option) => option.percent <= selectedPercent)
+        .map((option) => option.text)
+
+      // Stocker les options correspondantes dans l'objet selectedOptions
+      selectedOptions[`offer${index + 1}`] = optionsForValue
+    })
+
+    updateMyObject({
+      customPack: selectedOptions,
+    })
+    history.push(path.form)
+  }
   return (
     <div className={`${styles.container} App`}>
       <div className={styles.flower}>
@@ -270,6 +297,24 @@ const CustomPack = () => {
           </div>
         )
       })}
+      <div style={{ display: 'flex', alignSelf: 'flex-end', marginTop: 80 }}>
+        <ButtonView
+          onClick={() => history.push(path.form)}
+          link="https://yazzievent.com/template-rosaly/"
+          showIcon={false}
+          text="Passer"
+          className={styles.buttonSkiped}
+          classeTextButton={styles.buttontextskiped}
+        />
+        <ButtonView
+          onClick={handleSelectOptions}
+          link="https://yazzievent.com/template-rosaly/"
+          showIcon={false}
+          text="Valider mes options"
+          className={styles.buttonValidate}
+          classeTextButton={styles.buttontext}
+        />
+      </div>
     </div>
   )
 }
