@@ -51,7 +51,7 @@ function Router() {
             <Route path={path.form}>
               <Form />
             </Route>
-            {/*  <Redirect to={path.dashboard} /> */}
+            <Redirect to={path.dashboard} />
           </Switch>
         </Suspense>
       </OfferContextProvider>
