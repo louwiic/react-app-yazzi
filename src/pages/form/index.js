@@ -85,7 +85,7 @@ const Pack = () => {
     // Vérification des champs
     if (!fullName || !phoneNumber || !email || !dateMaried) {
       // Au moins un champ est vide, affichez un message d'erreur
-      alert('Veuillez remplir tous les champs.')
+
       return // Empêche la soumission du formulaire
     }
 
