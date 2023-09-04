@@ -2,7 +2,9 @@ import PreviewWindow from 'components/IFrame'
 import { Col, Container, Row } from 'reactstrap'
 import { images } from 'theme'
 import { path } from 'utils/const'
-import { useState } from 'react'
+import { useOfferContext } from 'context/offerContext'
+
+import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import styles from './pack.module.scss'
 
@@ -79,14 +81,6 @@ const ButtonView = ({ text, onClick }) => {
   )
 }
 
-const ButtonShow = ({ text, onClick }) => {
-  return (
-    <button onClick={onClick} className={styles.mybuttonshow} type="button">
-      <img src={images.eye} alt="eye" />
-    </button>
-  )
-}
-
 const Back = ({ history }) => {
   return (
     <div className={styles.containerback}>
@@ -131,7 +125,17 @@ const CheckComponent = ({ title, nocheck = false }) => {
   )
 }
 
-const PackOffer = ({ history }) => {
+const Form = ({ history, updateMyObject }) => {
+  const handleSelectPack = (item) => {
+    updateMyObject({
+      pack: {
+        name: item.offer,
+        options: '',
+      },
+    })
+    history.push(path.custompacks)
+  }
+
   return (
     <Row className={styles.row}>
       {packs?.map((item) => {
@@ -165,9 +169,7 @@ const PackOffer = ({ history }) => {
                 nocheck={item?.options3?.checked}
               />
               <ButtonView
-                onClick={() => {
-                  history.push(path.custompacks)
-                }}
+                onClick={() => handleSelectPack(item)}
                 link="https://yazzievent.com/template-rosaly/"
                 showIcon={false}
                 text="Sélectionner"
@@ -185,6 +187,11 @@ const Pack = () => {
   const [showPreview, setShowPreview] = useState(false)
   const [previewUrl, setPreviewUrl] = useState('')
   const [loading, setLoadging] = useState(false)
+  const { myObject, updateMyObject } = useOfferContext()
+
+  useEffect(() => {
+    console.log(' *** myObject ***', myObject)
+  }, [myObject])
 
   const handleClosePreview = () => {
     setShowPreview(false)
@@ -214,7 +221,7 @@ const Pack = () => {
         <h1 className={styles.titlebloc}>Sélectionnez votre pack</h1>
       </div>
 
-      <PackOffer history={history} />
+      <Form history={history} updateMyObject={updateMyObject} />
     </div>
   )
 }

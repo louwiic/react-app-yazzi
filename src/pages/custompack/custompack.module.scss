@@ -136,9 +136,26 @@
   padding-bottom: 96px;
 }
 
-.mybutton {
+.buttonSkiped {
   /* width: 214px; */
-  padding-left: 10px;
+  padding-right: 10px;
+  height: 56px;
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 18px;
+  font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 600;
+  margin-top: 48px;
+  color: white;
+  margin-right: 32px;
+  margin-bottom: 20px;
+  border: 2px solid #dfb693;
+}
+
+.buttonValidate {
   padding-right: 10px;
   height: 56px;
   border-radius: 16px;
@@ -154,7 +171,7 @@
   font-weight: 600;
   margin-top: 48px;
   color: white;
-  align-self: center;
+
   margin-bottom: 20px;
 }
 
@@ -178,6 +195,13 @@
   margin-top: -80px;
 }
 
+.buttontextskiped {
+  font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 600;
+  color: #dfb693;
+  font-size: 18px;
+  margin-left: 10px;
+}
 .buttontext {
   font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
   font-weight: 600;

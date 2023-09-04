@@ -1,8 +1,9 @@
 import PreviewWindow from 'components/IFrame'
-import { Col, Container, Row } from 'reactstrap'
+import { Col, Row } from 'reactstrap'
 import { images } from 'theme'
 import { path } from 'utils/const'
 
+import { useOfferContext } from 'context/offerContext'
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import styles from './templates.module.scss'
@@ -56,7 +57,7 @@ const Back = ({ history }) => {
   )
 }
 
-const TemplateOffer = ({ handleOpenPreview }) => {
+const TemplateOffer = ({ setTemplateChoosed, handleOpenPreview }) => {
   return (
     <Row className={styles.row}>
       <Col lg="3" md={6} className={styles.col}>
@@ -70,9 +71,10 @@ const TemplateOffer = ({ handleOpenPreview }) => {
           <img src={images.mockuprosaly} alt="img_heart" />
           <span className={styles.titlebutton}>Rosaly</span>
           <ButtonView
-            onClick={() =>
+            onClick={() => {
+              setTemplateChoosed('rosaly')
               handleOpenPreview('https://yazzievent.com/template-rosaly/')
-            }
+            }}
             link="https://yazzievent.com/template-rosaly/"
           />
         </div>
@@ -88,9 +90,10 @@ const TemplateOffer = ({ handleOpenPreview }) => {
           <img src={images.mockeupsky1} alt="img_heart" />
           <span className={styles.titlebutton}>Sky</span>
           <ButtonView
-            onClick={() =>
-              handleOpenPreview('https://yazzievent.com/template-sky/')
-            }
+            onClick={() => {
+              setTemplateChoosed('sky')
+              handleOpenPreview('https://yazzievent.com/template-sky/', 2)
+            }}
           />
         </div>
       </Col>
@@ -106,9 +109,10 @@ const TemplateOffer = ({ handleOpenPreview }) => {
           <img src={images.mockupnaturally1} alt="img_heart" />
           <span className={styles.titlebutton}>Naturally</span>
           <ButtonView
-            onClick={() =>
+            onClick={() => {
+              setTemplateChoosed('naturaly')
               handleOpenPreview('https://yazzievent.com/template-naturaly/')
-            }
+            }}
           />
         </div>
       </Col>
@@ -123,9 +127,10 @@ const TemplateOffer = ({ handleOpenPreview }) => {
           <img src={images.mockupgolden1} alt="img_heart" />
           <span className={styles.titlebutton}>Golden</span>
           <ButtonView
-            onClick={() =>
+            onClick={() => {
+              setTemplateChoosed('golden')
               handleOpenPreview('https://yazzievent.com/template-golden/')
-            }
+            }}
           />
         </div>
       </Col>
@@ -138,6 +143,8 @@ const Template = () => {
   const [showPreview, setShowPreview] = useState(false)
   const [previewUrl, setPreviewUrl] = useState('')
   const [loading, setLoadging] = useState(false)
+  const { myObject, updateMyObject } = useOfferContext()
+  const [templateChoosed, setTemplateChoosed] = useState(null)
 
   const handleClosePreview = () => {
     setShowPreview(false)
@@ -156,6 +163,11 @@ const Template = () => {
     }, 400)
   }
 
+  const handleSelectTemplate = () => {
+    updateMyObject({ templateName: templateChoosed })
+    history.push(path.packs)
+  }
+
   return (
     <div className={`${styles.container} App`}>
       <div className={styles.flower}>
@@ -169,9 +181,7 @@ const Template = () => {
             </Col>
             <Col md={3}>
               <ButtonView
-                onClick={() => {
-                  history.push(path.packs)
-                }}
+                onClick={handleSelectTemplate}
                 link="https://yazzievent.com/template-rosaly/"
                 text="Choisir ce template"
                 showIcon={false}
@@ -182,16 +192,13 @@ const Template = () => {
                   flexDirection: 'column',
                 }}
               >
-                <img
-                  src={images.mockuprosaly}
-                  alt="img_heart"
-                  style={{ backgroundColor: 'InfoBackground' }}
-                />
+                <img src={images.mockuprosaly} alt="img_heart" />
                 <ButtonShow
                   text="Changer de template"
-                  onClick={() =>
+                  onClick={() => {
+                    setTemplateChoosed('rosaly')
                     handleOpenPreview('https://yazzievent.com/template-rosaly/')
-                  }
+                  }}
                   link=""
                 />
               </div>
@@ -202,16 +209,13 @@ const Template = () => {
                   marginTop: 40,
                 }}
               >
-                <img
-                  src={images.mockeupsky1}
-                  alt="img_heart"
-                  style={{ backgroundColor: 'InfoBackground' }}
-                />
+                <img src={images.mockeupsky1} alt="img_heart" />
                 <ButtonShow
                   text="Changer de template"
-                  onClick={() =>
+                  onClick={() => {
+                    setTemplateChoosed('sky')
                     handleOpenPreview('https://yazzievent.com/template-sky/', 2)
-                  }
+                  }}
                   link=""
                 />
               </div>
@@ -222,18 +226,15 @@ const Template = () => {
                   marginTop: 40,
                 }}
               >
-                <img
-                  src={images.mockupnaturally1}
-                  alt="img_heart"
-                  style={{ backgroundColor: 'InfoBackground' }}
-                />
+                <img src={images.mockupnaturally1} alt="img_heart" />
                 <ButtonShow
                   text="Changer de template"
-                  onClick={() =>
+                  onClick={() => {
+                    setTemplateChoosed('naturaly')
                     handleOpenPreview(
                       'https://yazzievent.com/template-naturaly/',
                     )
-                  }
+                  }}
                   link=""
                 />
               </div>
@@ -244,16 +245,13 @@ const Template = () => {
                   marginTop: 40,
                 }}
               >
-                <img
-                  src={images.mockupgolden1}
-                  alt="img_heart"
-                  style={{ backgroundColor: 'InfoBackground' }}
-                />
+                <img src={images.mockupgolden1} alt="img_heart" />
                 <ButtonShow
                   text="Changer de template"
-                  onClick={() =>
+                  onClick={() => {
+                    setTemplateChoosed('golden')
                     handleOpenPreview('https://yazzievent.com/template-golden/')
-                  }
+                  }}
                   link=""
                 />
               </div>
@@ -271,7 +269,10 @@ const Template = () => {
         </h1>
       </div>
 
-      <TemplateOffer handleOpenPreview={handleOpenPreview} />
+      <TemplateOffer
+        handleOpenPreview={handleOpenPreview}
+        setTemplateChoosed={setTemplateChoosed}
+      />
     </div>
   )
 }

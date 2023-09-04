@@ -8,4 +8,5 @@ export const path = {
   template: '/template',
   packs: '/packs',
   custompacks: '/custompacks',
+  form: '/form',
 }
