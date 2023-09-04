@@ -16,6 +16,8 @@
     "import/imports-first": ["error", "absolute-first"],
     "import/newline-after-import": "error",
     "react/jsx-props-no-spreading": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
     "react/state-in-constructor": "off",
     "no-async-promise-executor": "off",
     "no-return-assign": "off",
@@ -26,8 +28,9 @@
     "react/no-unescaped-entities": "off", // Désactive react/no-unescaped-entities
     "arrow-body-style": "off",
     "no-console": "off",
-
+    "react/self-closing-comp": "off",
     "react/jsx-curly-brace-presence": "off",
+    "yoda": "off",
     "no-restricted-syntax": [
       "error",
       {

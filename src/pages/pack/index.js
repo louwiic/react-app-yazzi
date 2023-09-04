@@ -1,7 +1,7 @@
 import PreviewWindow from 'components/IFrame'
 import { Col, Container, Row } from 'reactstrap'
 import { images } from 'theme'
-
+import { path } from 'utils/const'
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import styles from './pack.module.scss'
@@ -131,7 +131,7 @@ const CheckComponent = ({ title, nocheck = false }) => {
   )
 }
 
-const PackOffer = ({ handleOpenPreview }) => {
+const PackOffer = ({ history }) => {
   return (
     <Row className={styles.row}>
       {packs?.map((item) => {
@@ -165,9 +165,9 @@ const PackOffer = ({ handleOpenPreview }) => {
                 nocheck={item?.options3?.checked}
               />
               <ButtonView
-                onClick={() =>
-                  handleOpenPreview('https://yazzievent.com/template-rosaly/')
-                }
+                onClick={() => {
+                  history.push(path.custompacks)
+                }}
                 link="https://yazzievent.com/template-rosaly/"
                 showIcon={false}
                 text="Sélectionner"
@@ -214,7 +214,7 @@ const Pack = () => {
         <h1 className={styles.titlebloc}>Sélectionnez votre pack</h1>
       </div>
 
-      <PackOffer handleOpenPreview={handleOpenPreview} />
+      <PackOffer history={history} />
     </div>
   )
 }

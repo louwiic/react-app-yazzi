@@ -10,6 +10,7 @@ import Spinner from 'components/Spinner'
 const Dashboard = React.lazy(() => import('./pages/dashboard'))
 const Templates = React.lazy(() => import('./pages/templates'))
 const Packs = React.lazy(() => import('./pages/pack'))
+const CustomPack = React.lazy(() => import('./pages/custompack'))
 
 function Router() {
   const dispatch = useDispatch()
@@ -28,29 +29,6 @@ function Router() {
     )
   }
 
-  /* return (
-    <BrowserRouter>
-      <Suspense fallback={<Fallback />}>
-        {!loggedIn ? (
-          <Switch>
-            <Route path="/">
-              <Auth />
-            </Route>
-            <Redirect to="/" />
-          </Switch>
-        ) : (
-          <Switch>
-            <Route path={path.dashboard}>
-              <Dashboard />
-            </Route>
-            <Redirect to={path.dashboard} />
-          </Switch>
-        )}
-      </Suspense>
-    </BrowserRouter>
-  )
-   */
-
   return (
     <BrowserRouter>
       <Suspense fallback={<Fallback />}>
@@ -64,7 +42,10 @@ function Router() {
           <Route path={path.packs}>
             <Packs />
           </Route>
-          <Redirect to={path.dashboard} />
+          <Route path={path.custompacks}>
+            <CustomPack />
+          </Route>
+          {/*  <Redirect to={path.dashboard} /> */}
         </Switch>
       </Suspense>
     </BrowserRouter>
