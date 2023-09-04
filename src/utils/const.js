@@ -7,4 +7,5 @@ export const path = {
   dashboard: '/dashboard',
   template: '/template',
   packs: '/packs',
+  custompacks: '/custompacks',
 }
