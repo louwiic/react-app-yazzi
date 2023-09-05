@@ -34,17 +34,19 @@ const ButtonView = ({ text, onClick }) => {
 const SuccessAlertModal = ({ isOpen, toggle, message }) => {
   return (
     <Modal isOpen={isOpen} toggle={toggle}>
-      <ModalHeader toggle={toggle}>Succès</ModalHeader>
+      <ModalHeader toggle={toggle}>
+        <span className={styles.titleModal}>Merci !</span>
+      </ModalHeader>
       <ModalBody>
-        <div className="alert alert-success" role="alert">
+        <div className={styles.modalMessage} role="alert">
           {message}
         </div>
       </ModalBody>
-      <ModalFooter>
+      {/*  <ModalFooter>
         <Button color="primary" type="submit" className={styles.buttonModal}>
           Fermer
         </Button>
-      </ModalFooter>
+      </ModalFooter> */}
     </Modal>
   )
 }
@@ -85,7 +87,7 @@ const Pack = () => {
   const [previewUrl, setPreviewUrl] = useState('')
   const [loading, setLoadging] = useState(false)
   const { myObject, updateMyObject } = useOfferContext()
-  const [isOpenModal, setIsOpenModal] = useState(true)
+  const [isOpenModal, setIsOpenModal] = useState(false)
   const [formData, setFormData] = useState({
     fullName: '',
     phoneNumber: '',
@@ -103,31 +105,43 @@ const Pack = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    setIsOpenModal(true)
+
+    setTimeout(() => {
+      setIsOpenModal(false)
+    }, 1800)
+
+    /* const data = {
+      ...formData,
+      offer: {
+        pack: myObject?.pack?.name,
+        template: myObject.templateName,
+        options: {
+          sms_campaign: myObject?.customPack?.offer1,
+          exctract_send: myObject?.customPack?.offer2,
+          management: myObject?.customPack?.offer3,
+        },
+      },
+    }
+
     const { fullName, phoneNumber, email, dateMaried } = formData
 
     try {
-      await firestore.collection('customers').add({
-        name: 'test',
-      })
+      await firestore.collection('customers').add(data)
+      setIsOpenModal(true)
+
+      setTimeout(() => {
+        setIsOpenModal(false)
+      }, 1500)
     } catch (error) {
       console.log(' *** error ***', error)
     }
-    console.log(' *** formdata ***', formData)
 
-    // Vérification des champs
     if (!fullName || !phoneNumber || !email || !dateMaried) {
-      // Au moins un champ est vide, affichez un message d'erreur
-
-      return // Empêche la soumission du formulaire
-    }
-
-    // Vous pouvez ici soumettre les données du formulaire ou les traiter selon vos besoins.
-    console.log(formData)
+      return
+    } */
   }
-
-  useEffect(() => {
-    console.log(' *** myObject ***', myObject)
-  }, [myObject])
 
   const handleClosePreview = () => {
     setShowPreview(false)
@@ -151,7 +165,10 @@ const Pack = () => {
       <div className={styles.flower}>
         <img src={images.leaf} alt="eye" />
       </div>
-      <SuccessAlertModal isOpen={isOpenModal} />
+      <SuccessAlertModal
+        isOpen={isOpenModal}
+        message={'Votre demande a bien été pris en compte !'}
+      />
       <Row>
         <Col md={6}>
           <Back history={history} />
