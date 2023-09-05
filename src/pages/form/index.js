@@ -7,12 +7,16 @@ import {
   FormGroup,
   Input,
   Label,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
   Row,
 } from 'reactstrap'
 import { images } from 'theme'
 import { path } from 'utils/const'
 import { useOfferContext } from 'context/offerContext'
-
+import { firestore } from 'utils/firebase'
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import styles from './form.module.scss'
@@ -24,6 +28,24 @@ const ButtonView = ({ text, onClick }) => {
         <span className={styles.buttontext}>{text || 'Prévisualiser'}</span>
       </div>
     </button>
+  )
+}
+
+const SuccessAlertModal = ({ isOpen, toggle, message }) => {
+  return (
+    <Modal isOpen={isOpen} toggle={toggle}>
+      <ModalHeader toggle={toggle}>Succès</ModalHeader>
+      <ModalBody>
+        <div className="alert alert-success" role="alert">
+          {message}
+        </div>
+      </ModalBody>
+      <ModalFooter>
+        <Button color="primary" type="submit" className={styles.buttonModal}>
+          Fermer
+        </Button>
+      </ModalFooter>
+    </Modal>
   )
 }
 
@@ -63,6 +85,7 @@ const Pack = () => {
   const [previewUrl, setPreviewUrl] = useState('')
   const [loading, setLoadging] = useState(false)
   const { myObject, updateMyObject } = useOfferContext()
+  const [isOpenModal, setIsOpenModal] = useState(true)
   const [formData, setFormData] = useState({
     fullName: '',
     phoneNumber: '',
@@ -78,9 +101,18 @@ const Pack = () => {
     })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     const { fullName, phoneNumber, email, dateMaried } = formData
+
+    try {
+      await firestore.collection('customers').add({
+        name: 'test',
+      })
+    } catch (error) {
+      console.log(' *** error ***', error)
+    }
+    console.log(' *** formdata ***', formData)
 
     // Vérification des champs
     if (!fullName || !phoneNumber || !email || !dateMaried) {
@@ -119,7 +151,7 @@ const Pack = () => {
       <div className={styles.flower}>
         <img src={images.leaf} alt="eye" />
       </div>
-
+      <SuccessAlertModal isOpen={isOpenModal} />
       <Row>
         <Col md={6}>
           <Back history={history} />

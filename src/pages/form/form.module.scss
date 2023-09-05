@@ -152,6 +152,25 @@
   margin-bottom: 20px;
 }
 
+.buttonModal {
+  padding-top: 14px;
+  padding-bottom: 14px;
+  border-radius: 16px;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #dfb693; /* Vous pouvez définir la couleur de fond souhaitée ici */
+  border: none;
+  cursor: pointer;
+  font-size: 22px;
+  font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 600;
+  color: white;
+  align-self: center;
+  margin-bottom: 20px;
+}
+
 .buttontext {
   font-family: 'Playfair Display', 'Arial Narrow', Arial, sans-serif;
   font-weight: 600;
