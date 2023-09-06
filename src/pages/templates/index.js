@@ -111,7 +111,7 @@ const TemplateOffer = ({ setTemplateChoosed, handleOpenPreview }) => {
           <ButtonView
             onClick={() => {
               setTemplateChoosed('naturaly')
-              handleOpenPreview('https://yazzievent.com/template-naturaly/')
+              handleOpenPreview('https://yazzievent.com/template-naturally/')
             }}
           />
         </div>
@@ -232,7 +232,7 @@ const Template = () => {
                   onClick={() => {
                     setTemplateChoosed('naturaly')
                     handleOpenPreview(
-                      'https://yazzievent.com/template-naturaly/',
+                      'https://yazzievent.com/template-naturally/',
                     )
                   }}
                   link=""

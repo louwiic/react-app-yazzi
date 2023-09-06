@@ -7,8 +7,9 @@
 
 .containertitle {
   display: flex;
-  flex-direction: column;
   margin-top: 15px;
+  align-items: center;
+  justify-content: center;
 }
 .titlecheck {
   font-size: 25px;
@@ -28,6 +29,9 @@
   flex-direction: column;
 }
 
+.content {
+  margin-top: 60px;
+}
 .containercheck {
   display: flex;
   flex-direction: column;
@@ -73,11 +77,10 @@
 }
 
 .titlebloc {
-  font-size: 50px;
+  font-size: 100px;
   font-family: 'Playfair Display', 'Arial Narrow', Arial, sans-serif;
   font-weight: 700;
   color: #00908a;
-  margin-top: 30;
   line-height: 67.5px;
 }
 
@@ -134,9 +137,10 @@
 }
 
 .mybutton {
-  padding-top: 22px;
-  padding-bottom: 22px;
+  padding-top: 8px;
+  padding-bottom: 8px;
   border-radius: 16px;
+  margin-top: 40px;
   width: 100%;
   flex-direction: column;
   justify-content: center;
@@ -144,39 +148,18 @@
   background-color: #dfb693; /* Vous pouvez définir la couleur de fond souhaitée ici */
   border: none;
   cursor: pointer;
-  font-size: 22px;
+  font-size: 10px;
   font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
   font-weight: 600;
   color: white;
   align-self: center;
-  margin-bottom: 20px;
-}
-
-.buttonModal {
-  padding-top: 14px;
-  padding-bottom: 14px;
-  border-radius: 16px;
-  width: 100%;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #dfb693; /* Vous pouvez définir la couleur de fond souhaitée ici */
-  border: none;
-  cursor: pointer;
-  font-size: 22px;
-  font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
-  font-weight: 600;
-  color: white;
-  align-self: center;
-  margin-bottom: 20px;
 }
 
 .buttontext {
   font-family: 'Playfair Display', 'Arial Narrow', Arial, sans-serif;
   font-weight: 600;
-  color: #255866;
-  font-size: 65px;
-  line-height: 87.75px;
+  color: #fff;
+  font-size: 30px;
   margin-top: 266px;
 }
 

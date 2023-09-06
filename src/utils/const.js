@@ -9,4 +9,6 @@ export const path = {
   packs: '/packs',
   custompacks: '/custompacks',
   form: '/form',
+  export: '/export',
+  recap: '/recap',
 }

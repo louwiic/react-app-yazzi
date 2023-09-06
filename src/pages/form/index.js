@@ -7,12 +7,17 @@ import {
   FormGroup,
   Input,
   Label,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
   Row,
+  Spinner,
 } from 'reactstrap'
 import { images } from 'theme'
 import { path } from 'utils/const'
 import { useOfferContext } from 'context/offerContext'
-
+import { firestore } from 'utils/firebase'
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import styles from './form.module.scss'
@@ -24,6 +29,33 @@ const ButtonView = ({ text, onClick }) => {
         <span className={styles.buttontext}>{text || 'Prévisualiser'}</span>
       </div>
     </button>
+  )
+}
+
+const SuccessAlertModal = ({ isOpen, toggle, message, showSpinned }) => {
+  return (
+    <Modal isOpen={isOpen} toggle={toggle}>
+      {showSpinned && (
+        <Spinner
+          color="#00908a"
+          isLoading
+          style={{ marginTop: 20, marginLeft: 20 }}
+        />
+      )}
+      <ModalHeader toggle={toggle}>
+        <span className={styles.titleModal}>Informations</span>
+      </ModalHeader>
+      <ModalBody>
+        <div className={styles.modalMessage} role="alert">
+          {message}
+        </div>
+      </ModalBody>
+      {/*  <ModalFooter>
+        <Button color="primary" type="submit" className={styles.buttonModal}>
+          Fermer
+        </Button>
+      </ModalFooter> */}
+    </Modal>
   )
 }
 
@@ -63,6 +95,13 @@ const Pack = () => {
   const [previewUrl, setPreviewUrl] = useState('')
   const [loading, setLoadging] = useState(false)
   const { myObject, updateMyObject } = useOfferContext()
+  const [isOpenModal, setIsOpenModal] = useState(false)
+  const [errors, setErrors] = useState({})
+  const [showSpinned, setShowSpinned] = useState(false)
+  const [messageAlert, setMessageAlert] = useState(
+    'Votre demande a bien été pris en compte !',
+  )
+
   const [formData, setFormData] = useState({
     fullName: '',
     phoneNumber: '',
@@ -78,24 +117,77 @@ const Pack = () => {
     })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    const { fullName, phoneNumber, email, dateMaried } = formData
 
-    // Vérification des champs
-    if (!fullName || !phoneNumber || !email || !dateMaried) {
-      // Au moins un champ est vide, affichez un message d'erreur
+    const newErrors = {}
+    console.log(
+      ' ***  ***',
+      JSON.stringify(
+        {
+          myObject,
+        },
+        null,
+        2,
+      ),
+    )
 
-      return // Empêche la soumission du formulaire
+    if (!myObject?.pack?.name || !myObject?.templateName) {
+      setMessageAlert(
+        'Vous devez choisir un pack et un template avant de continuer',
+      )
+      setIsOpenModal(true)
+      setShowSpinned(true)
+      setTimeout(() => {
+        setIsOpenModal(false)
+        history.push(path.dashboard)
+      }, 2500)
+      return
     }
 
-    // Vous pouvez ici soumettre les données du formulaire ou les traiter selon vos besoins.
-    console.log(formData)
-  }
+    if (!formData.fullName) {
+      newErrors.fullName = 'Le champ nom et prénom est requis.'
+    }
 
-  useEffect(() => {
-    console.log(' *** myObject ***', myObject)
-  }, [myObject])
+    if (!formData.phoneNumber) {
+      newErrors.phoneNumber = 'Le champ téléphone est requis.'
+    }
+
+    if (!formData.email) {
+      newErrors.email = 'Le champ email est requis.'
+    }
+    if (!formData.dateMaried) {
+      newErrors.dateMaried = 'Le champ date du mariage est requis.'
+    }
+
+    if (Object.keys(newErrors).length === 0) {
+      const data = {
+        ...formData,
+        offer: {
+          pack: myObject?.pack?.name,
+          template: myObject.templateName,
+          options: {
+            campagne_sms: myObject?.customPack?.offer1 || ['O relance'],
+            extraction_envoie: myObject?.customPack?.offer2 || ['Aucun'],
+            gestion_suivi: myObject?.customPack?.offer3 || ['Aucun'],
+          },
+        },
+      }
+      try {
+        await firestore.collection('customers').add(data)
+        setIsOpenModal(true)
+
+        setTimeout(() => {
+          setIsOpenModal(false)
+          history.push(path.recap)
+        }, 1800)
+      } catch (error) {
+        console.log(' *** error ***', error)
+      }
+    } else {
+      setErrors(newErrors)
+    }
+  }
 
   const handleClosePreview = () => {
     setShowPreview(false)
@@ -117,9 +209,13 @@ const Pack = () => {
   return (
     <div className={`${styles.container} App`}>
       <div className={styles.flower}>
-        <img src={images.leaf} alt="eye" />
+        <img src={images.leaf} alt="leaf" />
       </div>
-
+      <SuccessAlertModal
+        isOpen={isOpenModal}
+        message={messageAlert}
+        showSpinned={showSpinned}
+      />
       <Row>
         <Col md={6}>
           <Back history={history} />
@@ -159,39 +255,91 @@ const Pack = () => {
                     onChange={handleChange}
                     className={styles.input}
                   />
+                  {errors.fullName && (
+                    <div
+                      className="warning"
+                      style={{
+                        color: '#ff6d00',
+                        fontWeight: '500',
+                        fontSize: 20,
+                      }}
+                    >
+                      {errors.fullName}
+                    </div>
+                  )}
                 </FormGroup>
                 <FormGroup>
                   <Input
                     type="text"
                     name="phoneNumber"
                     id="phoneNumber"
-                    placeholder="Entrez votre nom"
+                    placeholder="Téléphone"
                     value={formData.phoneNumber}
                     onChange={handleChange}
                     className={styles.input}
                   />
+                  {errors.phoneNumber && (
+                    <div
+                      className="warning"
+                      style={{
+                        color: '#ff6d00',
+                        fontWeight: '500',
+                        fontSize: 20,
+                      }}
+                    >
+                      {errors.phoneNumber}
+                    </div>
+                  )}
+                </FormGroup>
+
+                <FormGroup>
+                  <Label for="dateMaried" className="text-white">
+                    Date de votre mariage
+                  </Label>
+                  <Input
+                    type="date"
+                    name="dateMaried"
+                    id="dateMaried"
+                    placeholder="Date de votre mariage"
+                    value={formData.dateMaried}
+                    onChange={handleChange}
+                    className={styles.input}
+                  />
+                  {errors.dateMaried && (
+                    <div
+                      className="warning"
+                      style={{
+                        color: '#ff6d00',
+                        fontWeight: '500',
+                        fontSize: 20,
+                      }}
+                    >
+                      {errors.dateMaried}
+                    </div>
+                  )}
                 </FormGroup>
                 <FormGroup>
                   <Input
                     type="email"
                     name="email"
                     id="email"
-                    placeholder="Entrez votre email"
+                    placeholder="Votre adresse email"
                     value={formData.email}
                     onChange={handleChange}
                     className={styles.input}
                   />
-                </FormGroup>
-                <FormGroup>
-                  <Input
-                    type="dateMaried"
-                    name="dateMaried"
-                    id="dateMaried"
-                    placeholder="Entrez votre mot de passe"
-                    value={formData.dateMaried}
-                    onChange={handleChange}
-                    className={styles.input}
-                  />
+                  {errors.email && (
+                    <div
+                      className="warning"
+                      style={{
+                        color: '#ff6d00',
+                        fontWeight: '500',
+                        fontSize: 20,
+                      }}
+                    >
+                      {errors.email}
+                    </div>
+                  )}
                 </FormGroup>
                 <Button
                   color="primary"
