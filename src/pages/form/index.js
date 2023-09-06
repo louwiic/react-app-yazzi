@@ -121,16 +121,6 @@ const Pack = () => {
     e.preventDefault()
 
     const newErrors = {}
-    console.log(
-      ' ***  ***',
-      JSON.stringify(
-        {
-          myObject,
-        },
-        null,
-        2,
-      ),
-    )
 
     if (!myObject?.pack?.name || !myObject?.templateName) {
       setMessageAlert(
@@ -347,6 +337,14 @@ const Pack = () => {
                   className={styles.mybutton}
                 >
                   Recevoir mon estimation
+                </Button>
+                <Button
+                  color="primary"
+                  type="button"
+                  onClick={() => history.push(path.recap)}
+                  className={styles.mybutton}
+                >
+                  Recap test
                 </Button>
               </Form>
               <div style={{ paddingBottom: 48 }}>

@@ -81,11 +81,7 @@ const CustomPack = () => {
   const [offer1, setOffer1] = useState(20)
   const [offer2, setOffer2] = useState(16)
   const [offer3, setOffer3] = useState(20)
-  const { myObject, updateMyObject } = useOfferContext()
-
-  useEffect(() => {
-    console.log(' *** myObject ***', myObject)
-  }, [myObject])
+  const { updateMyObject } = useOfferContext()
 
   const offers = [
     {
@@ -107,6 +103,7 @@ const CustomPack = () => {
         },
         {
           text: '2 relances',
+          infos: '+ 140€',
           percent: 60,
         },
         {
@@ -168,12 +165,13 @@ const CustomPack = () => {
         },
         {
           text: '6 mois',
+          infos: '+ 350€',
           percent: 60,
           color: true,
         },
         {
           text: '1 An',
-          infos: '+ 200€',
+          infos: '+ 690',
           percent: 100,
         },
       ],
@@ -265,7 +263,7 @@ const CustomPack = () => {
                             <span
                               onClick={() => handleSelect(item.percent, offer)}
                               style={{
-                                color: item.color ? '#00908A' : '#255866',
+                                color: accomplished ? '#00908A' : '#255866',
                                 fontSize: 22,
                                 fontFamily:
                                   "'Poppins', 'Arial Narrow', Arial, sans-serif",
