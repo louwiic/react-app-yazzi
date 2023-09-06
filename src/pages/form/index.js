@@ -98,12 +98,17 @@ const Pack = () => {
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [errors, setErrors] = useState({})
   const [showSpinned, setShowSpinned] = useState(false)
+  const [selectedGender, setSelectedGender] = useState('')
+  const handleGenderChange = (event) => {
+    setSelectedGender(event.target.value)
+  }
   const [messageAlert, setMessageAlert] = useState(
     'Votre demande a bien été pris en compte !',
   )
 
   const [formData, setFormData] = useState({
-    fullName: '',
+    firstname: '',
+    lastname: '',
     phoneNumber: '',
     email: '',
     dateMaried: '',
@@ -119,6 +124,7 @@ const Pack = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    formData.genre = selectedGender
 
     const newErrors = {}
 
@@ -135,8 +141,12 @@ const Pack = () => {
       return
     }
 
-    if (!formData.fullName) {
-      newErrors.fullName = 'Le champ nom et prénom est requis.'
+    if (!formData.lastname) {
+      newErrors.lastname = 'Le champ nom est requis.'
+    }
+
+    if (!formData.firstname) {
+      newErrors.firstname = 'Le champ prénom est requis.'
     }
 
     if (!formData.phoneNumber) {
@@ -209,17 +219,13 @@ const Pack = () => {
       <Row>
         <Col md={6}>
           <Back history={history} />
-          <div className={styles.containertitle}>
-            <h1 className={styles.titlebloc}>Entrez vos coordonnées</h1>
-            <p className={styles.subtitle}>
-              En soumettant ce formulaire, j'accepte que les informations
-              saisies soient utilisées pour permettre de me recontacter,
-              m'informer de promotions, dans le cadre de la relation commerciale
-              qui découle de cette prise de contact.
-            </p>
-          </div>
+          <div className={styles.containertitle}>{/*  */}</div>
           <p className={styles.buttontext}>
-            Et si on <br /> se disait oui ?
+            Et si on se <br /> disait oui ?
+          </p>
+          <p className={styles.subtitle}>
+            En attendant la finalisation du site, faites vous rappler par notre
+            équipe pour en savoir plus sur nos offres et promitions !
           </p>
         </Col>
         <Col md={6}>
@@ -235,30 +241,127 @@ const Pack = () => {
                   display: 'flex',
                 }}
               >
-                <FormGroup>
-                  <Input
-                    type="text"
-                    name="fullName"
-                    id="fullName"
-                    placeholder="Nom et prénom"
-                    value={formData.fullName}
-                    onChange={handleChange}
-                    className={styles.input}
-                  />
-                  {errors.fullName && (
-                    <div
-                      className="warning"
+                <FormGroup tag="fieldset" className="row">
+                  <FormGroup
+                    check
+                    style={{
+                      marginLeft: 10,
+                    }}
+                  >
+                    <Label
+                      check
                       style={{
-                        color: '#ff6d00',
-                        fontWeight: '500',
-                        fontSize: 20,
+                        color: '#FFFFFF',
                       }}
                     >
-                      {errors.fullName}
-                    </div>
-                  )}
+                      <Input
+                        type="radio"
+                        name="gender"
+                        value="madame"
+                        defaultChecked
+                        checked={selectedGender === 'madame'}
+                        onChange={handleGenderChange}
+                      />{' '}
+                      Madame
+                    </Label>
+                  </FormGroup>
+                  <FormGroup
+                    check
+                    style={{
+                      marginLeft: 10,
+                    }}
+                  >
+                    <Label
+                      check
+                      style={{
+                        color: '#FFFFFF',
+                      }}
+                    >
+                      <Input
+                        type="radio"
+                        name="gender"
+                        value="monsieur"
+                        checked={selectedGender === 'monsieur'}
+                        onChange={handleGenderChange}
+                      />{' '}
+                      Monsieur
+                    </Label>
+                  </FormGroup>
                 </FormGroup>
+
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-around',
+                    gap: 20,
+                  }}
+                >
+                  <FormGroup
+                    style={{
+                      flex: 1,
+                    }}
+                  >
+                    <Label for="firstname" className="text-white">
+                      Prénom
+                    </Label>
+                    <Input
+                      type="text"
+                      name="firstname"
+                      id="firstname"
+                      placeholder="Prénom"
+                      value={formData.firstname}
+                      onChange={handleChange}
+                      className={styles.input}
+                    />
+                    {errors.firstname && (
+                      <div
+                        className="warning"
+                        style={{
+                          color: '#ff6d00',
+                          fontWeight: '500',
+                          fontSize: 20,
+                        }}
+                      >
+                        {errors.firstname}
+                      </div>
+                    )}
+                  </FormGroup>
+
+                  <FormGroup
+                    style={{
+                      flex: 1,
+                    }}
+                  >
+                    <Label for="lastname" className="text-white">
+                      Nom
+                    </Label>
+                    <Input
+                      type="text"
+                      name="lastname"
+                      id="lastname"
+                      placeholder="Nom"
+                      value={formData.lastname}
+                      onChange={handleChange}
+                      className={styles.input}
+                    />
+                    {errors.lastname && (
+                      <div
+                        className="warning"
+                        style={{
+                          color: '#ff6d00',
+                          fontWeight: '500',
+                          fontSize: 20,
+                        }}
+                      >
+                        {errors.lastname}
+                      </div>
+                    )}
+                  </FormGroup>
+                </div>
                 <FormGroup>
+                  <Label for="phoneNumber" className="text-white">
+                    Téléphone
+                  </Label>
                   <Input
                     type="text"
                     name="phoneNumber"
@@ -283,32 +386,9 @@ const Pack = () => {
                 </FormGroup>
 
                 <FormGroup>
-                  <Label for="dateMaried" className="text-white">
-                    Date de votre mariage
+                  <Label for="email" className="text-white">
+                    E-mail
                   </Label>
-                  <Input
-                    type="date"
-                    name="dateMaried"
-                    id="dateMaried"
-                    placeholder="Date de votre mariage"
-                    value={formData.dateMaried}
-                    onChange={handleChange}
-                    className={styles.input}
-                  />
-                  {errors.dateMaried && (
-                    <div
-                      className="warning"
-                      style={{
-                        color: '#ff6d00',
-                        fontWeight: '500',
-                        fontSize: 20,
-                      }}
-                    >
-                      {errors.dateMaried}
-                    </div>
-                  )}
-                </FormGroup>
-                <FormGroup>
                   <Input
                     type="email"
                     name="email"
@@ -331,21 +411,47 @@ const Pack = () => {
                     </div>
                   )}
                 </FormGroup>
+                <FormGroup>
+                  <Label for="dateMaried" className="text-white">
+                    Date de l'évènement
+                  </Label>
+                  <Input
+                    type="text"
+                    name="dateMaried"
+                    id="dateMaried"
+                    placeholder="Date de votre mariage"
+                    value={formData.dateMaried}
+                    onChange={handleChange}
+                    className={styles.input}
+                  />
+                  {errors.dateMaried && (
+                    <div
+                      className="warning"
+                      style={{
+                        color: '#ff6d00',
+                        fontWeight: '500',
+                        fontSize: 20,
+                      }}
+                    >
+                      {errors.dateMaried}
+                    </div>
+                  )}
+                </FormGroup>
                 <Button
                   color="primary"
                   type="submit"
                   className={styles.mybutton}
                 >
-                  Recevoir mon estimation
+                  Être rappelé par nos équipes
                 </Button>
-                <Button
+                {/* <Button
                   color="primary"
                   type="button"
                   onClick={() => history.push(path.recap)}
                   className={styles.mybutton}
                 >
                   Recap test
-                </Button>
+                </Button> */}
               </Form>
               <div style={{ paddingBottom: 48 }}>
                 <p className={styles.textForm}>
