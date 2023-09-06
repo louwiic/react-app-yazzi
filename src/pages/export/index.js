@@ -44,7 +44,9 @@ const Pack = () => {
   const customersCollection = firestore.collection('customers')
 
   const headers = [
-    'Nom et prenom',
+    'Genre',
+    'Nom',
+    'Prenom',
     'Email',
     'Pack',
     'Template',
@@ -58,7 +60,9 @@ const Pack = () => {
       const csvData = snapshot.docs.map((doc) => {
         const data = doc.data()
         return {
-          'Nom et prenom': data.fullName,
+          Genre: data.genre,
+          Nom: data.firstname,
+          Prenom: data.lastname,
           Email: data.email,
           Pack: data.offer.pack,
           Template: data.offer.template,
