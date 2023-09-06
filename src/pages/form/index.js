@@ -12,6 +12,7 @@ import {
   ModalFooter,
   ModalHeader,
   Row,
+  Spinner,
 } from 'reactstrap'
 import { images } from 'theme'
 import { path } from 'utils/const'
@@ -31,11 +32,18 @@ const ButtonView = ({ text, onClick }) => {
   )
 }
 
-const SuccessAlertModal = ({ isOpen, toggle, message }) => {
+const SuccessAlertModal = ({ isOpen, toggle, message, showSpinned }) => {
   return (
     <Modal isOpen={isOpen} toggle={toggle}>
+      {showSpinned && (
+        <Spinner
+          color="#00908a"
+          isLoading
+          style={{ marginTop: 20, marginLeft: 20 }}
+        />
+      )}
       <ModalHeader toggle={toggle}>
-        <span className={styles.titleModal}>Merci !</span>
+        <span className={styles.titleModal}>Informations</span>
       </ModalHeader>
       <ModalBody>
         <div className={styles.modalMessage} role="alert">
@@ -88,6 +96,12 @@ const Pack = () => {
   const [loading, setLoadging] = useState(false)
   const { myObject, updateMyObject } = useOfferContext()
   const [isOpenModal, setIsOpenModal] = useState(false)
+  const [errors, setErrors] = useState({})
+  const [showSpinned, setShowSpinned] = useState(false)
+  const [messageAlert, setMessageAlert] = useState(
+    'Votre demande a bien été pris en compte !',
+  )
+
   const [formData, setFormData] = useState({
     fullName: '',
     phoneNumber: '',
@@ -106,41 +120,73 @@ const Pack = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    setIsOpenModal(true)
-
-    setTimeout(() => {
-      setIsOpenModal(false)
-    }, 1800)
-
-    /* const data = {
-      ...formData,
-      offer: {
-        pack: myObject?.pack?.name,
-        template: myObject.templateName,
-        options: {
-          sms_campaign: myObject?.customPack?.offer1,
-          exctract_send: myObject?.customPack?.offer2,
-          management: myObject?.customPack?.offer3,
+    const newErrors = {}
+    console.log(
+      ' ***  ***',
+      JSON.stringify(
+        {
+          myObject,
         },
-      },
-    }
+        null,
+        2,
+      ),
+    )
 
-    const { fullName, phoneNumber, email, dateMaried } = formData
-
-    try {
-      await firestore.collection('customers').add(data)
+    if (!myObject?.pack?.name || !myObject?.templateName) {
+      setMessageAlert(
+        'Vous devez choisir un pack et un template avant de continuer',
+      )
       setIsOpenModal(true)
-
+      setShowSpinned(true)
       setTimeout(() => {
         setIsOpenModal(false)
-      }, 1500)
-    } catch (error) {
-      console.log(' *** error ***', error)
+        history.push(path.dashboard)
+      }, 2500)
+      return
     }
 
-    if (!fullName || !phoneNumber || !email || !dateMaried) {
-      return
-    } */
+    if (!formData.fullName) {
+      newErrors.fullName = 'Le champ nom et prénom est requis.'
+    }
+
+    if (!formData.phoneNumber) {
+      newErrors.phoneNumber = 'Le champ téléphone est requis.'
+    }
+
+    if (!formData.email) {
+      newErrors.email = 'Le champ email est requis.'
+    }
+    if (!formData.dateMaried) {
+      newErrors.dateMaried = 'Le champ date du mariage est requis.'
+    }
+
+    if (Object.keys(newErrors).length === 0) {
+      const data = {
+        ...formData,
+        offer: {
+          pack: myObject?.pack?.name,
+          template: myObject.templateName,
+          options: {
+            campagne_sms: myObject?.customPack?.offer1 || ['O relance'],
+            extraction_envoie: myObject?.customPack?.offer2 || ['Aucun'],
+            gestion_suivi: myObject?.customPack?.offer3 || ['Aucun'],
+          },
+        },
+      }
+      try {
+        await firestore.collection('customers').add(data)
+        setIsOpenModal(true)
+
+        setTimeout(() => {
+          setIsOpenModal(false)
+          history.push(path.recap)
+        }, 1800)
+      } catch (error) {
+        console.log(' *** error ***', error)
+      }
+    } else {
+      setErrors(newErrors)
+    }
   }
 
   const handleClosePreview = () => {
@@ -163,11 +209,12 @@ const Pack = () => {
   return (
     <div className={`${styles.container} App`}>
       <div className={styles.flower}>
-        <img src={images.leaf} alt="eye" />
+        <img src={images.leaf} alt="leaf" />
       </div>
       <SuccessAlertModal
         isOpen={isOpenModal}
-        message={'Votre demande a bien été pris en compte !'}
+        message={messageAlert}
+        showSpinned={showSpinned}
       />
       <Row>
         <Col md={6}>
@@ -208,39 +255,91 @@ const Pack = () => {
                     onChange={handleChange}
                     className={styles.input}
                   />
+                  {errors.fullName && (
+                    <div
+                      className="warning"
+                      style={{
+                        color: '#ff6d00',
+                        fontWeight: '500',
+                        fontSize: 20,
+                      }}
+                    >
+                      {errors.fullName}
+                    </div>
+                  )}
                 </FormGroup>
                 <FormGroup>
                   <Input
                     type="text"
                     name="phoneNumber"
                     id="phoneNumber"
-                    placeholder="Entrez votre nom"
+                    placeholder="Téléphone"
                     value={formData.phoneNumber}
                     onChange={handleChange}
                     className={styles.input}
                   />
+                  {errors.phoneNumber && (
+                    <div
+                      className="warning"
+                      style={{
+                        color: '#ff6d00',
+                        fontWeight: '500',
+                        fontSize: 20,
+                      }}
+                    >
+                      {errors.phoneNumber}
+                    </div>
+                  )}
+                </FormGroup>
+
+                <FormGroup>
+                  <Label for="dateMaried" className="text-white">
+                    Date de votre mariage
+                  </Label>
+                  <Input
+                    type="date"
+                    name="dateMaried"
+                    id="dateMaried"
+                    placeholder="Date de votre mariage"
+                    value={formData.dateMaried}
+                    onChange={handleChange}
+                    className={styles.input}
+                  />
+                  {errors.dateMaried && (
+                    <div
+                      className="warning"
+                      style={{
+                        color: '#ff6d00',
+                        fontWeight: '500',
+                        fontSize: 20,
+                      }}
+                    >
+                      {errors.dateMaried}
+                    </div>
+                  )}
                 </FormGroup>
                 <FormGroup>
                   <Input
                     type="email"
                     name="email"
                     id="email"
-                    placeholder="Entrez votre email"
+                    placeholder="Votre adresse email"
                     value={formData.email}
                     onChange={handleChange}
                     className={styles.input}
                   />
-                </FormGroup>
-                <FormGroup>
-                  <Input
-                    type="dateMaried"
-                    name="dateMaried"
-                    id="dateMaried"
-                    placeholder="Entrez votre mot de passe"
-                    value={formData.dateMaried}
-                    onChange={handleChange}
-                    className={styles.input}
-                  />
+                  {errors.email && (
+                    <div
+                      className="warning"
+                      style={{
+                        color: '#ff6d00',
+                        fontWeight: '500',
+                        fontSize: 20,
+                      }}
+                    >
+                      {errors.email}
+                    </div>
+                  )}
                 </FormGroup>
                 <Button
                   color="primary"

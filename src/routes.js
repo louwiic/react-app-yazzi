@@ -13,6 +13,8 @@ const Templates = React.lazy(() => import('./pages/templates'))
 const Packs = React.lazy(() => import('./pages/pack'))
 const CustomPack = React.lazy(() => import('./pages/custompack'))
 const Form = React.lazy(() => import('./pages/form'))
+const Export = React.lazy(() => import('./pages/export'))
+const Recap = React.lazy(() => import('./pages/recap'))
 
 function Router() {
   const dispatch = useDispatch()
@@ -50,6 +52,12 @@ function Router() {
             </Route>
             <Route path={path.form}>
               <Form />
+            </Route>
+            <Route path={path.export}>
+              <Export />
+            </Route>
+            <Route path={path.recap}>
+              <Recap />
             </Route>
             <Redirect to={path.dashboard} />
           </Switch>
