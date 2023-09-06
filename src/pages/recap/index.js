@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { CSVLink } from 'react-csv'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom'
+import { path } from 'utils/const'
 import { useOfferContext } from 'context/offerContext'
 import { Col, Container, Modal, ModalBody, ModalHeader, Row } from 'reactstrap'
 import { images } from 'theme'
@@ -24,7 +25,7 @@ const Back = ({ history }) => {
         <button
           type="button"
           onClick={() => {
-            history.goBack()
+            history.push(path.dashboard)
           }}
           className={styles.back}
         >
@@ -98,7 +99,7 @@ const Pack = () => {
     let price
     if (myObject?.pack?.name === 'Every') {
       price = 1104
-    } else if (myObject?.pack?.name === 'Serana') {
+    } else if (myObject?.pack?.name === 'Serena') {
       price = 924
     } else if (myObject?.pack?.name === 'Darling') {
       price = 804
@@ -125,7 +126,7 @@ const Pack = () => {
       <SuccessAlertModal isOpen={isOpenModal} message={'Export CSV terminé'} />
       <Back history={history} />
 
-      <Container>
+      <Container className="d-flex" style={{ flexDirection: 'column' }}>
         <div className={styles.containertitle}>
           <div className="d-flex flex-column">
             <div>
@@ -245,6 +246,12 @@ const Pack = () => {
             </div>
           </Col>
         </Row>
+        <ButtonView
+          text="Générer un nouveau devis"
+          onClick={() => {
+            history.push(path.dashboard)
+          }}
+        />
       </Container>
     </div>
   )

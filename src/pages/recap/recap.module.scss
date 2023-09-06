@@ -110,6 +110,9 @@
   .col {
     margin-top: 40px;
   }
+  .img {
+    width: 200;
+  }
 }
 
 @media (min-width: 960px) and (max-width: 1024px) {
@@ -137,30 +140,32 @@
 }
 
 .mybutton {
-  padding-top: 8px;
-  padding-bottom: 8px;
+  /* width: 214px; */
+  padding-right: 78px;
+  padding-left: 78px;
+  height: 56px;
   border-radius: 16px;
-  margin-top: 40px;
-  width: 100%;
-  flex-direction: column;
+  display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #dfb693; /* Vous pouvez définir la couleur de fond souhaitée ici */
-  border: none;
+  align-self: center;
   cursor: pointer;
-  font-size: 10px;
+  font-size: 18px;
   font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
   font-weight: 600;
+  margin-top: 48px;
   color: white;
-  align-self: center;
+  margin-right: 32px;
+  margin-bottom: 20px;
+  border: 2px solid #dfb693;
 }
 
 .buttontext {
-  font-family: 'Playfair Display', 'Arial Narrow', Arial, sans-serif;
+  font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
   font-weight: 600;
-  color: #fff;
-  font-size: 30px;
-  margin-top: 266px;
+  color: #dfb693;
+  font-size: 18px;
+  margin-left: 10px;
 }
 
 .titleModal {
