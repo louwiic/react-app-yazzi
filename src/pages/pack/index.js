@@ -189,10 +189,6 @@ const Pack = () => {
   const [loading, setLoadging] = useState(false)
   const { myObject, updateMyObject } = useOfferContext()
 
-  useEffect(() => {
-    console.log(' *** myObject ***', myObject)
-  }, [myObject])
-
   const handleClosePreview = () => {
     setShowPreview(false)
     setPreviewUrl('')

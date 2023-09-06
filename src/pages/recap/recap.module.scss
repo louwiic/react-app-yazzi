@@ -169,11 +169,48 @@
   color: #255866;
   font-size: 40px;
 }
+
+.titleOptions {
+  font-family: 'Playfair Display', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 700;
+  color: #00908a;
+  font-size: 24px;
+  line-height: 40.5px;
+}
+.titlePack {
+  font-family: 'Playfair Display', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 700;
+  color: #00908a;
+  font-size: 40px;
+  line-height: 54px;
+}
+
 .modalMessage {
   font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
   font-weight: 600;
-  color: #255866;
+  color: #00908a;
   font-size: 30px;
+}
+
+.packname {
+  font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 600;
+  color: #00908a;
+  font-size: 30px;
+  text-align: center;
+}
+.titleContent {
+  font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 400;
+  color: #255866;
+  font-size: 18px;
+}
+
+.titlecustompack  {
+  font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 400;
+  color: #255866;
+  font-size: 18px;
 }
 
 .containerForm {

@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { CSVLink } from 'react-csv'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom'
+import { useOfferContext } from 'context/offerContext'
 import { Col, Container, Modal, ModalBody, ModalHeader, Row } from 'reactstrap'
 import { images } from 'theme'
 import { firestore } from 'utils/firebase'
@@ -29,7 +30,7 @@ const Back = ({ history }) => {
         >
           <img src={images.arrowback} alt="arrowback" />
         </button>
-        <span className={styles.backtext}>Retour</span>
+        <span className={styles.backtext}>Modifier ma sélection</span>
       </div>
     </div>
   )
@@ -55,24 +56,35 @@ const SuccessAlertModal = ({ isOpen, toggle, message }) => {
   )
 }
 
-const Template = () => {
-  switch ('toto') {
-    case 'toto':
-      return (
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            flex: 1,
-          }}
-        >
-          <img src={images.mockuprosaly} alt="img_heart" />
-          <span className={styles.titlebutton}>Rosaly</span>
-        </div>
-      )
-    default:
-      return <></>
+const Template = ({ myObject }) => {
+  function _capitalizeFirstLetter(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1)
   }
+  let img
+  if (myObject?.templateName === 'sky') {
+    img = images.mockeupsky1
+  } else if (myObject?.templateName === 'naturaly') {
+    img = images.mockupnaturally1
+  } else if (myObject?.templateName === 'golden') {
+    img = images.mockupgolden1
+  } else {
+    img = images.mockuprosaly
+  }
+  return (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        flex: 1,
+      }}
+    >
+      <span className={styles.titleContent}>Template : </span>
+      <img src={img} alt="img_heart" />
+      <span className={styles.packname}>
+        {_capitalizeFirstLetter(myObject?.templateName)}
+      </span>
+    </div>
+  )
 }
 
 const Pack = () => {
@@ -80,47 +92,29 @@ const Pack = () => {
   const [errors, setErrors] = useState({})
   const [dataCSV, setDataCSV] = useState([])
   const history = useHistory()
+  const { myObject, updateMyObject } = useOfferContext()
 
-  const customersCollection = firestore.collection('customers')
-
-  const headers = [
-    'Nom et prenom',
-    'Email',
-    'Pack',
-    'Template',
-    'Campagne SMS',
-    'Extraction & Envoie',
-    'Gestion & Suivi',
-  ]
-  const loadData = async () => {
-    try {
-      const snapshot = await customersCollection.get()
-      const csvData = snapshot.docs.map((doc) => {
-        const data = doc.data()
-        return {
-          'Nom et prenom': data.fullName,
-          Email: data.email,
-          Pack: data.offer.pack,
-          Template: data.offer.template,
-          'Campagne SMS': (data.offer.options.campagne_sms || []).slice(-1)[0],
-          'Extraction & Envoie': (
-            data.offer.options.extraction_envoie || []
-          ).slice(-1)[0],
-          'Gestion & Suivi': (data.offer.options.gestion_suivi || []).slice(
-            -1,
-          )[0],
-        }
-      })
-
-      setDataCSV(csvData)
-    } catch (error) {
-      console.error("Erreur lors de l'export CSV :", error)
+  const tarif = useMemo(() => {
+    let price
+    if (myObject?.pack?.name === 'Every') {
+      price = 1104
+    } else if (myObject?.pack?.name === 'Serana') {
+      price = 924
+    } else if (myObject?.pack?.name === 'Darling') {
+      price = 804
+    } else if (myObject?.pack?.name === 'Essential') {
+      price = 624
     }
-  }
 
+    return price
+  }, [myObject])
   useEffect(() => {
-    loadData()
-  }, [])
+    console.log(' *** myObject  recap ***', myObject)
+  }, [myObject])
+
+  const offer1 = ['Aucun', 'Compris avec votre pack', '+140€', '+220€']
+  const offer2 = ['Aucun', '+40€', '+150€', '+210€', '+280€']
+  const offer3 = ['Aucun', '+180€', '+350€', '+690€']
 
   return (
     <div className={`${styles.container} App`}>
@@ -152,7 +146,7 @@ const Pack = () => {
             <span style={{ alignSelf: 'center', marginBottom: 30 }}>
               Votre tarif :{' '}
             </span>
-            <h1 className={styles.titlebloc}>1335€ TTC</h1>
+            <h1 className={styles.titlebloc}>{tarif}€ TTC</h1>
           </div>
           <div className="d-flex flex-column" style={{ marginLeft: 30 }}>
             <div>
@@ -168,9 +162,18 @@ const Pack = () => {
             />
           </div>
         </div>
+        <div
+          style={{
+            height: 1,
+            width: '100%',
+            backgroundColor: '#30303010',
+            marginTop: 50,
+            marginBottom: 50,
+          }}
+        ></div>
         <Row className={styles.content}>
           <Col md={3}>
-            <Template />
+            <Template myObject={myObject} />
           </Col>
           <Col md={3}>
             <div
@@ -179,27 +182,66 @@ const Pack = () => {
                 flexDirection: 'column',
               }}
             >
-              <span>Pack</span>
+              <span className={styles.titleContent}>Pack : </span>
+              <span className={styles.titlePack}>{myObject?.pack?.name}</span>
             </div>
           </Col>
-          <Col md={3}>
+
+          <Col md={6}>
+            <span className={styles.titleContent}>Options : </span>
             <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-              }}
+              style={{ flexDirection: 'row', display: 'flex', marginTop: 16 }}
             >
-              <span>Options</span>
+              <div>
+                <span className={styles.titleOptions}>Campagnes SMS</span>
+
+                <p className={styles.titlecustompack}>
+                  {
+                    myObject?.customPack?.offer1?.[
+                      myObject?.customPack?.offer1?.length - 1
+                    ]
+                  }{' '}
+                  (
+                  {offer1?.[myObject?.customPack?.offer1?.length - 1] ||
+                    'Aucun'}
+                  )
+                </p>
+              </div>
+              <div
+                style={{
+                  marginLeft: 52,
+                }}
+              >
+                <span className={styles.titleOptions}>Extraction & envoie</span>
+                <div>
+                  {
+                    myObject?.customPack?.offer2?.[
+                      myObject?.customPack?.offer2?.length - 1
+                    ]
+                  }{' '}
+                  (
+                  {offer2?.[myObject?.customPack?.offer2?.length - 1] ||
+                    'Aucun'}
+                  )
+                </div>
+              </div>
             </div>
-          </Col>
-          <Col md={3}>
             <div
               style={{
-                display: 'flex',
                 flexDirection: 'column',
+                marginTop: 24,
               }}
             >
-              <span>Extraction & Envoie</span>
+              <span className={styles.titleOptions}>Gestion & Suivi</span>
+              <div>
+                {
+                  myObject?.customPack?.offer3?.[
+                    myObject?.customPack?.offer3?.length - 1
+                  ]
+                }{' '}
+                ({offer3?.[myObject?.customPack?.offer3?.length - 1] || 'Aucun'}
+                )
+              </div>
             </div>
           </Col>
         </Row>
