@@ -55,6 +55,26 @@ const SuccessAlertModal = ({ isOpen, toggle, message }) => {
   )
 }
 
+const Template = () => {
+  switch ('toto') {
+    case 'toto':
+      return (
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            flex: 1,
+          }}
+        >
+          <img src={images.mockuprosaly} alt="img_heart" />
+          <span className={styles.titlebutton}>Rosaly</span>
+        </div>
+      )
+    default:
+      return <></>
+  }
+}
+
 const Pack = () => {
   const [isOpenModal, setIsOpenModal] = useState(false)
   const [errors, setErrors] = useState({})
@@ -126,7 +146,12 @@ const Pack = () => {
               }}
             />
           </div>
-          <div style={{ marginTop: 80 }}>
+          <div
+            style={{ marginTop: 80, display: 'flex', flexDirection: 'column' }}
+          >
+            <span style={{ alignSelf: 'center', marginBottom: 30 }}>
+              Votre tarif :{' '}
+            </span>
             <h1 className={styles.titlebloc}>1335€ TTC</h1>
           </div>
           <div className="d-flex flex-column" style={{ marginLeft: 30 }}>
@@ -143,6 +168,41 @@ const Pack = () => {
             />
           </div>
         </div>
+        <Row className={styles.content}>
+          <Col md={3}>
+            <Template />
+          </Col>
+          <Col md={3}>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
+              <span>Pack</span>
+            </div>
+          </Col>
+          <Col md={3}>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
+              <span>Options</span>
+            </div>
+          </Col>
+          <Col md={3}>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
+              <span>Extraction & Envoie</span>
+            </div>
+          </Col>
+        </Row>
       </Container>
     </div>
   )
