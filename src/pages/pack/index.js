@@ -111,15 +111,25 @@ const Back = ({ history }) => {
   )
 }
 
-const CheckComponent = ({ title, nocheck = false }) => {
+const CheckComponent = ({ type, title, nocheck = false, textStyle }) => {
+  let styleCustom = {}
+  let img = images.check
+  if (nocheck) {
+    styleCustom = { backgroundColor: '#25586615' }
+    img = images.nocheck
+  }
+  if (type === 'Every') {
+    styleCustom = { backgroundColor: '#ffffff' }
+    img = images.checkgreen
+  }
+
   return (
     <div className={styles.containercheck}>
-      <span className={styles.titlecheck}>{title}</span>
-      <div
-        className={styles.contentcheck}
-        style={nocheck ? { backgroundColor: '#25586615' } : {}}
-      >
-        <img src={nocheck ? images.nocheck : images.check} alt="arrowback" />
+      <span className={styles.titlecheck} style={textStyle}>
+        {title}
+      </span>
+      <div className={styles.contentcheck} style={styleCustom}>
+        <img src={img} alt="arrowback" />
       </div>
     </div>
   )
@@ -150,23 +160,49 @@ const Form = ({ history, updateMyObject }) => {
                 overflow: 'visible',
                 borderWidth: 2,
                 borderColor: '#00908A',
+                ...(item.offer === 'Every' && { backgroundColor: '#00908A' }),
               }}
             >
-              <span style={{ textAlign: 'center', marginTop: '20px' }}>
+              <span
+                style={{
+                  textAlign: 'center',
+                  marginTop: '20px',
+                  ...(item.offer === 'Every' && { color: '#ffffff' }),
+                }}
+              >
                 Pack
               </span>
-              <span className={styles.titlebutton}>{item?.offer}</span>
+              <span
+                className={styles.titlebutton}
+                style={{
+                  ...(item.offer === 'Every' && { color: '#ffffff' }),
+                }}
+              >
+                {item?.offer}
+              </span>
               <CheckComponent
+                type={item.offer}
                 title="Site internet"
                 nocheck={item?.options1?.checked}
+                textStyle={{
+                  ...(item.offer === 'Every' && { color: '#ffffff' }),
+                }}
               />
               <CheckComponent
+                type={item.offer}
                 title="Album photo"
                 nocheck={item?.options2?.checked}
+                textStyle={{
+                  ...(item.offer === 'Every' && { color: '#ffffff' }),
+                }}
               />
               <CheckComponent
+                type={item.offer}
                 title="Gestion RSVP + Relance SMS"
                 nocheck={item?.options3?.checked}
+                textStyle={{
+                  ...(item.offer === 'Every' && { color: '#ffffff' }),
+                }}
               />
               <ButtonView
                 onClick={() => handleSelectPack(item)}

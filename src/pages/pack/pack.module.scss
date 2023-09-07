@@ -32,7 +32,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-top: 1px solid #30303020; /* Bordure en haut */
+
   border-bottom: 1px solid #30303020; /* Bordure en bas */
   margin-left: 32px;
   margin-right: 32px;
@@ -87,6 +87,10 @@
   line-height: 47.25px;
   text-align: center;
   color: #255866;
+  border-bottom: 1px solid #30303020; /* Bordure en haut */
+  margin-left: 32px;
+  margin-right: 32px;
+  padding-bottom: 24px;
 }
 /* Media query pour les smartphones */
 @media (max-width: 768px) {

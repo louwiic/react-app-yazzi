@@ -15,6 +15,7 @@ import check from 'assets/images/check.png'
 import nocheck from 'assets/images/no_check.png'
 import arrowL from 'assets/images/arrowL.png'
 import arrowR from 'assets/images/arrowR.png'
+import checkgreen from 'assets/images/checkgreen.png'
 
 export const images = {
   logo,
@@ -33,6 +34,7 @@ export const images = {
   nocheck,
   arrowL,
   arrowR,
+  checkgreen,
 }
 
 export default {}
