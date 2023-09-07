@@ -201,3 +201,29 @@
   width: 45%;
   height: rem(50);
 }
+
+.wheelcontainer {
+  display: flex;
+  background-color: #303030;
+  margin-left: 40px;
+  border-radius: 32px 32px 0px 0px;
+  padding-block: 24px;
+  padding-inline: 32px;
+}
+
+.wheeltitle {
+  font-size: 25px;
+  font-family: 'Playfair Display', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 700;
+  text-align: center;
+  color: #ffffff;
+  display: block;
+}
+
+.wheelsubtitle {
+  font-size: 14px;
+  font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 400;
+  color: #ffffff;
+  display: block;
+}

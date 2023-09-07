@@ -16,6 +16,7 @@ import nocheck from 'assets/images/no_check.png'
 import arrowL from 'assets/images/arrowL.png'
 import arrowR from 'assets/images/arrowR.png'
 import checkgreen from 'assets/images/checkgreen.png'
+import jackpot from 'assets/images/jackpot.png'
 
 export const images = {
   logo,
@@ -35,6 +36,7 @@ export const images = {
   arrowL,
   arrowR,
   checkgreen,
+  jackpot,
 }
 
 export default {}

@@ -12733,6 +12733,13 @@ react-transition-group@^4.3.0:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
+react-wheel-of-prizes@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/react-wheel-of-prizes/-/react-wheel-of-prizes-1.0.9.tgz#3458b68668f5ef1e732949d28608a0af62e9e415"
+  integrity sha512-aqRfC8+RZwRPp3fJMmcefxLpRfV3dEfaLZP0NQhwy7vXpf0zuaxesZ+Ut5yFkWyzTuxI3b/qKVbtBB1Yy6OePw==
+  dependencies:
+    "@babel/runtime" "^7.15.4"
+
 react@^17.0.2:
   version "17.0.2"
   resolved "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
