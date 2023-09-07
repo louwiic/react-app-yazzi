@@ -51,10 +51,34 @@
   margin-top: 30;
 }
 
-/* Media query pour les smartphones */
 @media (max-width: 768px) {
   .titlebloc {
     font-size: 40px;
+  }
+  .arrowContainer {
+    position: relative;
+    display: flex;
+  }
+}
+
+@media (min-width: 960px) and (max-width: 1024px) {
+  .col {
+    margin-top: 40px;
+  }
+  .arrowContainer {
+    position: relative;
+    display: flex;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 959px) {
+  /* Vos styles pour les tablettes en mode portrait ici */
+  .col {
+    margin-top: 40px;
+  }
+  .arrowContainer {
+    position: relative;
+    display: flex;
   }
 }
 
@@ -126,8 +150,9 @@
   display: flex;
   flex-direction: column;
   margin-top: 30px;
-  margin-left: 20px;
-  align-items: center;
+  position: relative;
+  right: 0px;
+  margin-left: 60px;
 }
 .arrowleft {
 }

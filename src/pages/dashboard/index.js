@@ -40,6 +40,7 @@ const Dashboard = () => {
                 flexDirection: 'row',
                 alignSelf: 'center',
                 marginTop: '80px',
+                marginLeft: 290,
               }}
             >
               <button

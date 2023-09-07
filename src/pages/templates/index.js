@@ -66,6 +66,7 @@ const TemplateOffer = ({ setTemplateChoosed, handleOpenPreview }) => {
             display: 'flex',
             flexDirection: 'column',
             flex: 1,
+            backgroundColor: 'orangered',
           }}
         >
           <img src={images.mockuprosaly} alt="img_heart" />
@@ -85,6 +86,7 @@ const TemplateOffer = ({ setTemplateChoosed, handleOpenPreview }) => {
             display: 'flex',
             flexDirection: 'column',
             flex: 1,
+            backgroundColor: 'orangered',
           }}
         >
           <img src={images.mockeupsky1} alt="img_heart" />
@@ -104,6 +106,7 @@ const TemplateOffer = ({ setTemplateChoosed, handleOpenPreview }) => {
             display: 'flex',
             flexDirection: 'column',
             flex: 1,
+            backgroundColor: 'orangered',
           }}
         >
           <img src={images.mockupnaturally1} alt="img_heart" />
@@ -122,6 +125,7 @@ const TemplateOffer = ({ setTemplateChoosed, handleOpenPreview }) => {
             display: 'flex',
             flexDirection: 'column',
             flex: 1,
+            backgroundColor: 'orangered',
           }}
         >
           <img src={images.mockupgolden1} alt="img_heart" />
