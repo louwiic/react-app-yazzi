@@ -24,11 +24,11 @@
 }
 
 .titlepreview {
-  font-size: 75px;
+  font-size: 40px;
   font-family: 'Playfair Display', 'Arial Narrow', Arial, sans-serif;
-  font-weight: 700;
+  font-weight: 600;
   color: #00908a;
-  line-height: 67.5px;
+  line-height: 54px;
   margin-top: 20px;
   margin-bottom: 20px;
 }
@@ -156,6 +156,25 @@
   color: white;
   align-self: center;
 }
+.buttonView {
+  width: '100%';
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 56px;
+  border-radius: 16px;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  background-color: #dfb693;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 600;
+  margin-top: 48px;
+  color: white;
+}
 
 .mybuttonshow {
   width: 40px;
@@ -182,6 +201,14 @@
   font-weight: 600;
   color: white;
   font-size: 18px;
+  margin-left: 10px;
+}
+
+.buttontextChoice {
+  font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 600;
+  color: white;
+  font-size: 25px;
   margin-left: 10px;
 }
 

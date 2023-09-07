@@ -8,12 +8,24 @@ import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import styles from './templates.module.scss'
 
-const ButtonView = ({ text, onClick, showIcon = true }) => {
+const ButtonView = ({
+  text,
+  onClick,
+  showIcon = true,
+  className,
+  textStyle,
+}) => {
   return (
-    <button onClick={onClick} className={styles.mybutton} type="button">
+    <button
+      onClick={onClick}
+      className={className || styles.mybutton}
+      type="button"
+    >
       <div style={{}}>
         {showIcon && <img src={images.eye} alt="eye" />}
-        <span className={styles.buttontext}>{text || 'Prévisualiser'}</span>
+        <span className={textStyle || styles.buttontext}>
+          {text || 'Prévisualiser'}
+        </span>
       </div>
     </button>
   )
@@ -66,7 +78,6 @@ const TemplateOffer = ({ setTemplateChoosed, handleOpenPreview }) => {
             display: 'flex',
             flexDirection: 'column',
             flex: 1,
-            backgroundColor: 'orangered',
           }}
         >
           <img src={images.mockuprosaly} alt="img_heart" />
@@ -74,7 +85,7 @@ const TemplateOffer = ({ setTemplateChoosed, handleOpenPreview }) => {
           <ButtonView
             onClick={() => {
               setTemplateChoosed('rosaly')
-              handleOpenPreview('https://yazzievent.com/template-rosaly/')
+              handleOpenPreview('rosaly')
             }}
             link="https://yazzievent.com/template-rosaly/"
           />
@@ -86,7 +97,6 @@ const TemplateOffer = ({ setTemplateChoosed, handleOpenPreview }) => {
             display: 'flex',
             flexDirection: 'column',
             flex: 1,
-            backgroundColor: 'orangered',
           }}
         >
           <img src={images.mockeupsky1} alt="img_heart" />
@@ -94,7 +104,8 @@ const TemplateOffer = ({ setTemplateChoosed, handleOpenPreview }) => {
           <ButtonView
             onClick={() => {
               setTemplateChoosed('sky')
-              handleOpenPreview('https://yazzievent.com/template-sky/', 2)
+
+              handleOpenPreview('sky')
             }}
           />
         </div>
@@ -106,7 +117,6 @@ const TemplateOffer = ({ setTemplateChoosed, handleOpenPreview }) => {
             display: 'flex',
             flexDirection: 'column',
             flex: 1,
-            backgroundColor: 'orangered',
           }}
         >
           <img src={images.mockupnaturally1} alt="img_heart" />
@@ -114,7 +124,7 @@ const TemplateOffer = ({ setTemplateChoosed, handleOpenPreview }) => {
           <ButtonView
             onClick={() => {
               setTemplateChoosed('naturaly')
-              handleOpenPreview('https://yazzievent.com/template-naturally/')
+              handleOpenPreview('naturaly')
             }}
           />
         </div>
@@ -125,7 +135,6 @@ const TemplateOffer = ({ setTemplateChoosed, handleOpenPreview }) => {
             display: 'flex',
             flexDirection: 'column',
             flex: 1,
-            backgroundColor: 'orangered',
           }}
         >
           <img src={images.mockupgolden1} alt="img_heart" />
@@ -133,7 +142,7 @@ const TemplateOffer = ({ setTemplateChoosed, handleOpenPreview }) => {
           <ButtonView
             onClick={() => {
               setTemplateChoosed('golden')
-              handleOpenPreview('https://yazzievent.com/template-golden/')
+              handleOpenPreview('golden')
             }}
           />
         </div>
@@ -188,6 +197,43 @@ const Template = () => {
     history.push(path.packs)
   }
 
+  const selectStyle =
+    templateChoosed === 'rosaly'
+      ? {
+          border: '2px solid #00908A',
+          paddingBlock: 16,
+          paddingInline: 8,
+          borderRadius: 16,
+        }
+      : undefined
+  const selectStyleSky =
+    templateChoosed === 'sky'
+      ? {
+          border: '2px solid #00908A',
+          paddingBlock: 16,
+          paddingInline: 8,
+          borderRadius: 16,
+        }
+      : undefined
+  const selectStyleNat =
+    templateChoosed === 'naturaly'
+      ? {
+          border: '2px solid #00908A',
+          paddingBlock: 16,
+          paddingInline: 8,
+          borderRadius: 16,
+        }
+      : undefined
+  const selectStyleGol =
+    templateChoosed === 'golden'
+      ? {
+          border: '2px solid #00908A',
+          paddingBlock: 16,
+          paddingInline: 8,
+          borderRadius: 16,
+        }
+      : undefined
+
   return (
     <div className={`${styles.container} App`}>
       <div className={styles.flower}>
@@ -195,22 +241,15 @@ const Template = () => {
       </div>
       {showPreview && (
         <>
-          {templateChoosed && (
-            <span className={styles.titlepreview}>
-              {_capitalizeFirstLetter(templateChoosed)}
-            </span>
-          )}
           <Row>
             <Col md={9}>
               {showPreview && <PreviewWindow url={previewUrl} />}
             </Col>
             <Col md={3}>
-              <ButtonView
-                onClick={handleSelectTemplate}
-                link="https://yazzievent.com/template-rosaly/"
-                text="Choisir ce template"
-                showIcon={false}
-              />
+              <span className={styles.titlepreview}>
+                Nos autres <br /> templates
+              </span>
+
               <div
                 onClick={() => {
                   setTemplateChoosed('rosaly')
@@ -219,6 +258,8 @@ const Template = () => {
                 style={{
                   display: 'flex',
                   flexDirection: 'column',
+                  marginTop: 32,
+                  ...selectStyle,
                 }}
               >
                 <img src={images.mockuprosaly} alt="img_heart" />
@@ -240,6 +281,7 @@ const Template = () => {
                   display: 'flex',
                   flexDirection: 'column',
                   marginTop: 40,
+                  ...selectStyleSky,
                 }}
               >
                 <img src={images.mockeupsky1} alt="img_heart" />
@@ -261,6 +303,7 @@ const Template = () => {
                   display: 'flex',
                   flexDirection: 'column',
                   marginTop: 40,
+                  ...selectStyleNat,
                 }}
               >
                 <img src={images.mockupnaturally1} alt="img_heart" />
@@ -282,6 +325,7 @@ const Template = () => {
                   display: 'flex',
                   flexDirection: 'column',
                   marginTop: 40,
+                  ...selectStyleGol,
                 }}
               >
                 <img src={images.mockupgolden1} alt="img_heart" />
@@ -294,24 +338,41 @@ const Template = () => {
                   link=""
                 />
               </div>
+              <div
+                style={{
+                  display: 'flex',
+                }}
+              >
+                <ButtonView
+                  onClick={handleSelectTemplate}
+                  link="https://yazzievent.com/template-rosaly/"
+                  text={`Choisir ce  template`}
+                  showIcon={false}
+                  className={styles.buttonView}
+                  textStyle={styles.buttontextChoice}
+                />
+              </div>
             </Col>
           </Row>
         </>
       )}
 
-      <Back history={history} />
-      {/* Affichage de la prévisualisation */}
+      {!showPreview && (
+        <>
+          <Back history={history} />
 
-      <div className={styles.containertitle}>
-        <h1 className={styles.titlebloc}>
-          Sélectionnez votre template de site
-        </h1>
-      </div>
+          <div className={styles.containertitle}>
+            <h1 className={styles.titlebloc}>
+              Sélectionnez votre template de site
+            </h1>
+          </div>
 
-      <TemplateOffer
-        handleOpenPreview={handleOpenPreview}
-        setTemplateChoosed={setTemplateChoosed}
-      />
+          <TemplateOffer
+            handleOpenPreview={handleOpenPreview}
+            setTemplateChoosed={setTemplateChoosed}
+          />
+        </>
+      )}
     </div>
   )
 }
