@@ -1,13 +1,19 @@
 import { useHistory } from 'react-router-dom'
+import { useState } from 'react'
 import { Col, Row } from 'reactstrap'
 import { images } from 'theme'
+import { WheelGame } from 'components/WheelGame'
 import { path } from 'utils/const'
 import styles from './dashboard.module.scss'
 
 const Dashboard = () => {
-  /* const dispatch = useDispatch() */
-  /*  const { me } = useSelector((state) => state.app) */
+  const [modalOpen, setModalOpen] = useState(false)
+
+  const toggleModal = () => {
+    setModalOpen(!modalOpen)
+  }
   const history = useHistory()
+
   return (
     <div className={`${styles.bgcontainer} App`}>
       <Row style={{}}>
@@ -79,6 +85,29 @@ const Dashboard = () => {
             <img src={images.flowerR} alt="flowerR" />
           </div>
         </Col>
+        {/*  <WheelGame /> */}
+        <div
+          onClick={() => setModalOpen(!modalOpen)}
+          className={styles.wheelcontainer}
+        >
+          <div>
+            <img
+              src={images.jackpot}
+              alt="img_heart"
+              style={{
+                height: 88,
+                width: 77,
+              }}
+            />
+          </div>
+          <div style={{ marginLeft: 32 }}>
+            <p className={styles.wheeltitle}>Tourner la roue</p>
+            <p className={styles.wheelsubtitle}>
+              Tenter de gagner <br /> jusqu’à -20% sur votre site !
+            </p>
+          </div>
+        </div>
+        <WheelGame modalOpen={modalOpen} toggleModal={toggleModal} />
       </Row>
     </div>
   )
