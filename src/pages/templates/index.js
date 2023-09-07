@@ -146,12 +146,28 @@ const Template = () => {
   const { myObject, updateMyObject } = useOfferContext()
   const [templateChoosed, setTemplateChoosed] = useState(null)
 
+  function _capitalizeFirstLetter(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1)
+  }
+
   const handleClosePreview = () => {
     setShowPreview(false)
     setPreviewUrl('')
   }
 
-  const handleOpenPreview = (url, number) => {
+  const handleOpenPreview = (type, number) => {
+    let url
+
+    if (type === 'rosaly') {
+      url = 'https://yazzievent.com/template-rosaly/'
+    } else if (type === 'sky') {
+      url = 'https://yazzievent.com/template-sky/'
+    } else if (type === 'naturaly') {
+      url = 'https://yazzievent.com/template-naturally/'
+    } else if (type === 'golden') {
+      url = 'https://yazzievent.com/template-golden/'
+    }
+
     handleClosePreview()
     window.scrollTo({
       top: 0,
@@ -175,6 +191,11 @@ const Template = () => {
       </div>
       {showPreview && (
         <>
+          {templateChoosed && (
+            <span className={styles.titlepreview}>
+              {_capitalizeFirstLetter(templateChoosed)}
+            </span>
+          )}
           <Row>
             <Col md={9}>
               {showPreview && <PreviewWindow url={previewUrl} />}
@@ -187,6 +208,10 @@ const Template = () => {
                 showIcon={false}
               />
               <div
+                onClick={() => {
+                  setTemplateChoosed('rosaly')
+                  handleOpenPreview('rosaly')
+                }}
                 style={{
                   display: 'flex',
                   flexDirection: 'column',
@@ -197,12 +222,16 @@ const Template = () => {
                   text="Changer de template"
                   onClick={() => {
                     setTemplateChoosed('rosaly')
-                    handleOpenPreview('https://yazzievent.com/template-rosaly/')
+                    handleOpenPreview('rosaly')
                   }}
                   link=""
                 />
               </div>
               <div
+                onClick={() => {
+                  setTemplateChoosed('sky')
+                  handleOpenPreview('sky', 2)
+                }}
                 style={{
                   display: 'flex',
                   flexDirection: 'column',
@@ -214,12 +243,16 @@ const Template = () => {
                   text="Changer de template"
                   onClick={() => {
                     setTemplateChoosed('sky')
-                    handleOpenPreview('https://yazzievent.com/template-sky/', 2)
+                    handleOpenPreview('sky', 2)
                   }}
                   link=""
                 />
               </div>
               <div
+                onClick={() => {
+                  setTemplateChoosed('naturaly')
+                  handleOpenPreview('naturaly', 2)
+                }}
                 style={{
                   display: 'flex',
                   flexDirection: 'column',
@@ -231,14 +264,16 @@ const Template = () => {
                   text="Changer de template"
                   onClick={() => {
                     setTemplateChoosed('naturaly')
-                    handleOpenPreview(
-                      'https://yazzievent.com/template-naturally/',
-                    )
+                    handleOpenPreview('naturaly', 2)
                   }}
                   link=""
                 />
               </div>
               <div
+                onClick={() => {
+                  setTemplateChoosed('golden')
+                  handleOpenPreview('golden')
+                }}
                 style={{
                   display: 'flex',
                   flexDirection: 'column',
@@ -250,7 +285,7 @@ const Template = () => {
                   text="Changer de template"
                   onClick={() => {
                     setTemplateChoosed('golden')
-                    handleOpenPreview('https://yazzievent.com/template-golden/')
+                    handleOpenPreview('golden')
                   }}
                   link=""
                 />
