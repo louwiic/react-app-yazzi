@@ -18,7 +18,7 @@ const PreviewWindow = ({ url: urlProps }) => {
   }, [urlProps])
 
   useEffect(() => {
-    iframeRef.current.src = 'https://www.monfairepart.com/'
+    iframeRef.current.src = urlProps
 
     setTimeout(() => {
       setLoading(true) // Démarrez le chargement
