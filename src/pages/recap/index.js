@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { CSVLink } from 'react-csv'
+import { WheelGame } from 'components/WheelGame'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom'
 import { path } from 'utils/const'
 import { useOfferContext } from 'context/offerContext'
@@ -94,6 +94,21 @@ const Pack = () => {
   const [dataCSV, setDataCSV] = useState([])
   const history = useHistory()
   const { myObject, updateMyObject } = useOfferContext()
+  const offer1 = ['Aucun', 'Compris avec votre pack', 140, 220]
+  const offer2 = ['Aucun', 40, 150, 210, 280]
+  const offer3 = ['Aucun', 180, 350, 690]
+  const [modalOpen, setModalOpen] = useState(false)
+  const toggleModal = () => {
+    setModalOpen(!modalOpen)
+  }
+
+  const getAditionnalOptions = (offer, pack) => {
+    const content =
+      typeof offer?.[pack?.length - 1] === 'number'
+        ? `+${offer?.[pack?.length - 1]}€`
+        : offer?.[pack?.length - 1]
+    return content
+  }
 
   const tarif = useMemo(() => {
     let price
@@ -107,15 +122,16 @@ const Pack = () => {
       price = 624
     }
 
+    const priceOffer1 = offer1?.[myObject?.customPack?.offer1?.length - 1]
+    const priceOffer2 = offer2?.[myObject?.customPack?.offer2?.length - 1]
+    const priceOffer3 = offer3?.[myObject?.customPack?.offer3?.length - 1]
+
     return price
   }, [myObject])
-  useEffect(() => {
-    console.log(' *** myObject  recap ***', myObject)
-  }, [myObject])
 
-  const offer1 = ['Aucun', 'Compris avec votre pack', '+140€', '+220€']
-  const offer2 = ['Aucun', '+40€', '+150€', '+210€', '+280€']
-  const offer3 = ['Aucun', '+180€', '+350€', '+690€']
+  useEffect(() => {
+    /*  console.log(' *** myObject  recap ***', myObject) */
+  }, [myObject])
 
   return (
     <div className={`${styles.container} App`}>
@@ -203,7 +219,7 @@ const Pack = () => {
                     ]
                   }{' '}
                   (
-                  {offer1?.[myObject?.customPack?.offer1?.length - 1] ||
+                  {getAditionnalOptions(offer1, myObject?.customPack?.offer1) ||
                     'Aucun'}
                   )
                 </p>
@@ -221,7 +237,7 @@ const Pack = () => {
                     ]
                   }{' '}
                   (
-                  {offer2?.[myObject?.customPack?.offer2?.length - 1] ||
+                  {getAditionnalOptions(offer2, myObject?.customPack?.offer2) ||
                     'Aucun'}
                   )
                 </div>
@@ -240,7 +256,9 @@ const Pack = () => {
                     myObject?.customPack?.offer3?.length - 1
                   ]
                 }{' '}
-                ({offer3?.[myObject?.customPack?.offer3?.length - 1] || 'Aucun'}
+                (
+                {getAditionnalOptions(offer3, myObject?.customPack?.offer3) ||
+                  'Aucun'}
                 )
               </div>
             </div>
@@ -253,6 +271,32 @@ const Pack = () => {
           }}
         />
       </Container>
+      <div
+        onClick={() => setModalOpen(!modalOpen)}
+        className={styles.wheelcontainer}
+      >
+        <div>
+          <img
+            src={images.jackpot}
+            alt="img_heart"
+            style={{
+              height: 88,
+              width: 77,
+            }}
+          />
+        </div>
+        <div style={{ marginLeft: 32 }}>
+          <p className={styles.wheeltitle}>Tourner la roue</p>
+          <p className={styles.wheelsubtitle}>
+            Tenter de gagner <br /> jusqu’à -20% sur votre site !
+          </p>
+        </div>
+      </div>
+      <WheelGame
+        modalOpen={modalOpen}
+        toggleModal={toggleModal}
+        setModalOpen={setModalOpen}
+      />
     </div>
   )
 }

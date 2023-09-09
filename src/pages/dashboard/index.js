@@ -107,7 +107,11 @@ const Dashboard = () => {
             </p>
           </div>
         </div>
-        <WheelGame modalOpen={modalOpen} toggleModal={toggleModal} />
+        <WheelGame
+          modalOpen={modalOpen}
+          toggleModal={toggleModal}
+          setModalOpen={setModalOpen}
+        />
       </Row>
     </div>
   )

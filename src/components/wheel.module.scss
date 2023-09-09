@@ -1,38 +1,8 @@
-@import '../../theme/core.scss';
-
-.root {
-  flex: 1;
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  background-color: $dark-gray;
-  height: '100vh';
-}
-
-.middle {
-  display: flex;
-  flex-direction: column;
-}
+@import '../theme/core.scss';
 
 .row {
   display: flex;
   margin-top: 64px;
-}
-
-.banner {
-  background-color: #00908a;
-}
-
-.titlepreview {
-  font-size: 40px;
-  font-family: 'Playfair Display', 'Arial Narrow', Arial, sans-serif;
-  font-weight: 600;
-  color: #00908a;
-  line-height: 54px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  display: flex;
-  margin-left: 30px;
 }
 
 .containertitle {
@@ -40,7 +10,12 @@
   flex-direction: column;
   margin-top: 15px;
 }
-
+.titlecheck {
+  font-size: 25px;
+  font-family: 'Playfair Display', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 700;
+  color: #255866;
+}
 .logocontainer {
   display: flex;
   align-items: center;
@@ -51,6 +26,34 @@
   display: flex;
   margin-top: 48px;
   flex-direction: column;
+}
+
+.label {
+  color: #255866;
+}
+
+.containercheck {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-top: 1px solid #30303020; /* Bordure en haut */
+  border-bottom: 1px solid #30303020; /* Bordure en bas */
+  margin-left: 32px;
+  margin-right: 32px;
+  padding-bottom: 24px;
+  padding-top: 18px;
+  margin-top: 24px;
+}
+
+.contentcheck {
+  display: flex;
+  height: 40px;
+  width: 40px;
+  background-color: #00908a;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  margin-top: 24px;
 }
 
 .flower {
@@ -68,31 +71,28 @@
   border-radius: 16px;
 }
 
-.back2 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 50px;
-  width: 50px;
-  background-color: #00908a;
-  border-radius: 16px;
-}
-
 .backtext {
   margin-left: 24px;
   color: #00908a;
 }
 
-.imgheart {
-  display: flex;
-  align-self: flex-end;
-}
 .titlebloc {
   font-size: 50px;
   font-family: 'Playfair Display', 'Arial Narrow', Arial, sans-serif;
   font-weight: 700;
   color: #00908a;
   margin-top: 30;
+  line-height: 67.5px;
+}
+
+.titleform {
+  font-size: 35px;
+  font-family: 'Playfair Display', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 700;
+  color: #ffffff;
+
+  text-align: center;
+  line-height: 47.25px;
 }
 
 .titlebutton {
@@ -129,131 +129,105 @@
 .container {
   background-image: url('/assets/images/BG.png');
   background-size: cover;
-  width: 100%;
   padding-left: 112px;
   padding-right: 112px;
   display: flex;
   flex: 1;
   flex-direction: column;
+  padding-bottom: 48px;
 }
 
-.asiderigthcontainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.buttonContainer {
-  align-self: center;
-  display: flex;
-
-  flex-direction: row;
-}
 .mybutton {
-  /* width: 214px; */
-  padding-left: 10px;
-  padding-right: 10px;
-  height: 56px;
+  padding-top: 22px;
+  padding-bottom: 22px;
   border-radius: 16px;
-  display: flex;
+  width: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: #dfb693; /* Vous pouvez définir la couleur de fond souhaitée ici */
   border: none;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 22px;
   font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
   font-weight: 600;
-  margin-top: 48px;
   color: white;
   align-self: center;
-}
-.buttonView {
-  width: '100%';
-  padding-left: 10px;
-  padding-right: 10px;
-  height: 56px;
-  border-radius: 16px;
-  display: flex;
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  background-color: #dfb693;
-  border: none;
-  cursor: pointer;
-  font-size: 18px;
-  font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
-  font-weight: 600;
-  margin-top: 48px;
-  color: white;
+  margin-bottom: 20px;
 }
 
-.mybuttonshow {
-  /*   width: 40px; */
-  padding-inline: 10px;
-  padding-block: 10px;
-  /*  height: 40px; */
+.buttonModal {
+  padding-top: 14px;
+  padding-bottom: 14px;
   border-radius: 16px;
-  display: flex;
+  width: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: #dfb693; /* Vous pouvez définir la couleur de fond souhaitée ici */
   border: none;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 22px;
   font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
   font-weight: 600;
-  align-self: flex-end;
   color: white;
-  margin-right: 10px;
-  margin-top: -60px;
+  align-self: center;
+  margin-bottom: 20px;
 }
 
 .buttontext {
+  font-family: 'Playfair Display', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 600;
+  color: #255866;
+  font-size: 65px;
+  line-height: 87.75px;
+}
+
+.titleModal {
+  font-family: 'Playfair Display', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 600;
+  color: #255866;
+  font-size: 40px;
+}
+.modalMessage {
   font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
   font-weight: 600;
-  color: white;
+  color: #255866;
+  font-size: 30px;
+}
+
+.containerForm {
+  margin-top: 48px;
+  border-radius: 0 40px 0 40px;
+  background-color: #00908a;
+  padding-top: 48px;
+}
+
+.input {
+  border-color: '#255866';
+  height: 66px;
+  border-radius: 18px;
+  font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 22;
+}
+
+.textForm {
+  font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 400;
+  color: #255866;
+  font-size: 13px;
+  color: black;
+  text-align: center;
+  line-height: 17.55px;
+}
+
+.subtitle {
+  font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 400;
   font-size: 18px;
-  margin-left: 10px;
 }
 
-.buttontextChoice {
-  font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
-  font-weight: 600;
-  color: white;
-  font-size: 25px;
-  margin-left: 10px;
-}
-
-.greeting {
-  color: white;
-  font-size: rem(16);
-  position: absolute;
-  top: rem(32);
-  right: rem(32);
-}
-
-.title {
-  color: white;
-  margin-top: rem(40);
-  font-size: rem(52);
-  text-align: center;
-}
-
-.description {
-  color: $light-gray;
-  margin-top: rem(24);
-  font-size: rem(16);
-  text-align: center;
-}
-
-.logo {
-  width: rem(160);
-  height: rem(160);
-}
-
-.logout {
-  width: 45%;
-  height: rem(50);
+.labelMaried {
+  color: #fff;
 }
