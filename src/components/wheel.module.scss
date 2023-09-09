@@ -1,0 +1,233 @@
+@import '../theme/core.scss';
+
+.row {
+  display: flex;
+  margin-top: 64px;
+}
+
+.containertitle {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+}
+.titlecheck {
+  font-size: 25px;
+  font-family: 'Playfair Display', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 700;
+  color: #255866;
+}
+.logocontainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+}
+.containerback {
+  display: flex;
+  margin-top: 48px;
+  flex-direction: column;
+}
+
+.label {
+  color: #255866;
+}
+
+.containercheck {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-top: 1px solid #30303020; /* Bordure en haut */
+  border-bottom: 1px solid #30303020; /* Bordure en bas */
+  margin-left: 32px;
+  margin-right: 32px;
+  padding-bottom: 24px;
+  padding-top: 18px;
+  margin-top: 24px;
+}
+
+.contentcheck {
+  display: flex;
+  height: 40px;
+  width: 40px;
+  background-color: #00908a;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  margin-top: 24px;
+}
+
+.flower {
+  position: absolute;
+  right: 0;
+}
+
+.back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70px;
+  width: 70px;
+  background-color: #00908a;
+  border-radius: 16px;
+}
+
+.backtext {
+  margin-left: 24px;
+  color: #00908a;
+}
+
+.titlebloc {
+  font-size: 50px;
+  font-family: 'Playfair Display', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 700;
+  color: #00908a;
+  margin-top: 30;
+  line-height: 67.5px;
+}
+
+.titleform {
+  font-size: 35px;
+  font-family: 'Playfair Display', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 700;
+  color: #ffffff;
+
+  text-align: center;
+  line-height: 47.25px;
+}
+
+.titlebutton {
+  font-size: 35px;
+  font-family: 'Playfair Display', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 600;
+  line-height: 47.25px;
+  text-align: center;
+  color: #255866;
+}
+/* Media query pour les smartphones */
+@media (max-width: 768px) {
+  .titlebloc {
+    font-size: 40px;
+  }
+  .col {
+    margin-top: 40px;
+  }
+}
+
+@media (min-width: 960px) and (max-width: 1024px) {
+  .col {
+    margin-top: 40px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 959px) {
+  /* Vos styles pour les tablettes en mode portrait ici */
+  .col {
+    margin-top: 40px;
+  }
+}
+
+.container {
+  background-image: url('/assets/images/BG.png');
+  background-size: cover;
+  padding-left: 112px;
+  padding-right: 112px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding-bottom: 48px;
+}
+
+.mybutton {
+  padding-top: 22px;
+  padding-bottom: 22px;
+  border-radius: 16px;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #dfb693; /* Vous pouvez définir la couleur de fond souhaitée ici */
+  border: none;
+  cursor: pointer;
+  font-size: 22px;
+  font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 600;
+  color: white;
+  align-self: center;
+  margin-bottom: 20px;
+}
+
+.buttonModal {
+  padding-top: 14px;
+  padding-bottom: 14px;
+  border-radius: 16px;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #dfb693; /* Vous pouvez définir la couleur de fond souhaitée ici */
+  border: none;
+  cursor: pointer;
+  font-size: 22px;
+  font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 600;
+  color: white;
+  align-self: center;
+  margin-bottom: 20px;
+}
+
+.buttontext {
+  font-family: 'Playfair Display', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 600;
+  color: #255866;
+  font-size: 65px;
+  line-height: 87.75px;
+}
+
+.titleModal {
+  font-family: 'Playfair Display', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 600;
+  color: #255866;
+  font-size: 40px;
+}
+.modalMessage {
+  font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 600;
+  color: #255866;
+  font-size: 30px;
+}
+
+.containerForm {
+  margin-top: 48px;
+  border-radius: 0 40px 0 40px;
+  background-color: #00908a;
+  padding-top: 48px;
+}
+
+.input {
+  border-color: '#255866';
+  height: 66px;
+  border-radius: 18px;
+  font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 22;
+}
+
+.textForm {
+  font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 400;
+  color: #255866;
+  font-size: 13px;
+  color: black;
+  text-align: center;
+  line-height: 17.55px;
+}
+
+.subtitle {
+  font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.labelMaried {
+  color: #fff;
+}
