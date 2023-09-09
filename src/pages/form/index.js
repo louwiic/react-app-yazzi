@@ -237,7 +237,7 @@ const Pack = () => {
           </p>
           <p className={styles.subtitle}>
             En attendant la finalisation du site, faites vous rappler par notre
-            équipe pour en savoir plus sur nos offres et promitions !
+            équipe pour en savoir plus sur nos offres et promotions !
           </p>
         </Col>
         <Col md={6}>
@@ -431,7 +431,7 @@ const Pack = () => {
                     type="text"
                     name="dateMaried"
                     id="dateMaried"
-                    placeholder="Ex : 20/02/2024"
+                    placeholder="20/02/2024"
                     value={formData.dateMaried}
                     onChange={handleChange}
                     className={styles.input}

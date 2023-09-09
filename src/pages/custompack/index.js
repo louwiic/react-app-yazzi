@@ -272,7 +272,7 @@ const CustomPack = () => {
                             >
                               {item.text}
                             </span>
-                            <span
+                            {/* <span
                               style={{
                                 display: 'block',
                                 fontSize: 18,
@@ -282,7 +282,7 @@ const CustomPack = () => {
                               }}
                             >
                               {item.infos}
-                            </span>
+                            </span> */}
                           </div>
                         </div>
                       )
