@@ -237,8 +237,23 @@ const Pack = () => {
           </p>
           <p className={styles.subtitle}>
             En attendant la finalisation du site, faites vous rappler par notre
-            équipe pour en savoir plus sur nos offres et promitions !
+            équipe pour en savoir plus sur nos offres et promotions !
           </p>
+          <div
+            style={{
+              display: 'flex',
+              position: 'absolute',
+              bottom: 0,
+            }}
+          >
+            <Button
+              onClick={() => history.push(path.dashboard)}
+              type="submit"
+              className={styles.mybutton}
+            >
+              Accueil
+            </Button>
+          </div>
         </Col>
         <Col md={6}>
           <div className={styles.containerForm}>
@@ -431,7 +446,7 @@ const Pack = () => {
                     type="text"
                     name="dateMaried"
                     id="dateMaried"
-                    placeholder="Ex : 20/02/2024"
+                    placeholder="20/02/2024"
                     value={formData.dateMaried}
                     onChange={handleChange}
                     className={styles.input}
@@ -477,11 +492,7 @@ const Pack = () => {
                     </span>
                   </Label>
                 </FormGroup>
-                <Button
-                  color="primary"
-                  type="submit"
-                  className={styles.mybutton}
-                >
+                <Button type="submit" className={styles.mybutton}>
                   Recevoir mon estimation
                 </Button>
                 {/* <Button

@@ -272,6 +272,7 @@ const Template = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     marginTop: 32,
+                    width: '80%',
                     ...selectStyle,
                   }}
                 >
@@ -297,6 +298,7 @@ const Template = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     marginTop: 40,
+                    width: '80%',
                     ...selectStyleSky,
                   }}
                 >
@@ -322,6 +324,7 @@ const Template = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     marginTop: 40,
+                    width: '80%',
                     ...selectStyleNat,
                   }}
                 >
@@ -347,6 +350,7 @@ const Template = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     marginTop: 40,
+                    width: '80%',
                     ...selectStyleGol,
                   }}
                 >
