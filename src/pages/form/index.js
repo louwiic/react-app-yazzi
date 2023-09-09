@@ -99,6 +99,11 @@ const Pack = () => {
   const [errors, setErrors] = useState({})
   const [showSpinned, setShowSpinned] = useState(false)
   const [selectedGender, setSelectedGender] = useState('')
+  const [noDate, setNoDate] = useState(false)
+
+  const handleCheckboxChange = () => {
+    setNoDate(!noDate)
+  }
   const handleGenderChange = (event) => {
     setSelectedGender(event.target.value)
   }
@@ -126,7 +131,8 @@ const Pack = () => {
     const regexDate = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/
 
     e.preventDefault()
-    formData.genre = selectedGender
+    /* formData.genre = selectedGender */
+    formData.noDate = noDate
 
     const newErrors = {}
 
@@ -158,10 +164,10 @@ const Pack = () => {
     if (!formData.email) {
       newErrors.email = 'Le champ email est requis.'
     }
-    if (!formData.dateMaried) {
+    if (!formData.dateMaried && !noDate) {
       newErrors.dateMaried = 'Le champ date du mariage est requis.'
     }
-    if (regexDate.test(formData.dateMaried) === false) {
+    if (regexDate.test(formData.dateMaried) === false && !noDate) {
       newErrors.dateMaried =
         'Le champ date du mariage doit être dans le format jour/mois/année par exemple 02/10/2025.'
     }
@@ -416,6 +422,33 @@ const Pack = () => {
                       {errors.email}
                     </div>
                   )}
+                </FormGroup>
+                <FormGroup
+                  check
+                  style={{
+                    marginBlock: 18,
+                  }}
+                >
+                  <Label check>
+                    <Input
+                      type="checkbox"
+                      checked={noDate}
+                      onChange={handleCheckboxChange}
+                      style={{
+                        width: 18,
+                        height: 18,
+                      }}
+                    />
+                    <span
+                      style={{
+                        color: 'white',
+                        fontSize: 18,
+                        marginLeft: 10,
+                      }}
+                    >
+                      Je n'ai pas encore de date
+                    </span>
+                  </Label>
                 </FormGroup>
                 <FormGroup>
                   <Label for="dateMaried" className="text-white">
