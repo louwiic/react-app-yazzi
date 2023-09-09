@@ -444,14 +444,14 @@ const Pack = () => {
                 >
                   Être rappelé par nos équipes
                 </Button>
-                {/* <Button
+                <Button
                   color="primary"
                   type="button"
                   onClick={() => history.push(path.recap)}
                   className={styles.mybutton}
                 >
                   Recap test
-                </Button> */}
+                </Button>
               </Form>
               <div style={{ paddingBottom: 48 }}>
                 <p className={styles.textForm}>

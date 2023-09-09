@@ -11,9 +11,10 @@ export function useOfferContext() {
 // Créez un Provider pour encapsuler votre application
 export function OfferContextProvider({ children }) {
   const [myObject, setMyObject] = useState({
-    templateName: '', // Nom du template
-    pack: { name: '', options: [] }, // Pack d'options
-    customPack: { options: [] }, // Propriété de pack personnalisé
+    templateName: '',
+    wheelGains: '',
+    pack: { name: '', options: [] },
+    customPack: { options: [] },
   })
 
   // Créez une fonction pour mettre à jour myObject

@@ -94,6 +94,17 @@ const Pack = () => {
   const [dataCSV, setDataCSV] = useState([])
   const history = useHistory()
   const { myObject, updateMyObject } = useOfferContext()
+  const offer1 = ['Aucun', 'Compris avec votre pack', 140, 220]
+  const offer2 = ['Aucun', 40, 150, 210, 280]
+  const offer3 = ['Aucun', 180, 350, 690]
+
+  const getAditionnalOptions = (offer, pack) => {
+    const content =
+      typeof offer?.[pack?.length - 1] === 'number'
+        ? `+${offer?.[pack?.length - 1]}€`
+        : offer?.[pack?.length - 1]
+    return content
+  }
 
   const tarif = useMemo(() => {
     let price
@@ -107,15 +118,16 @@ const Pack = () => {
       price = 624
     }
 
+    const priceOffer1 = offer1?.[myObject?.customPack?.offer1?.length - 1]
+    const priceOffer2 = offer2?.[myObject?.customPack?.offer2?.length - 1]
+    const priceOffer3 = offer3?.[myObject?.customPack?.offer3?.length - 1]
+
     return price
   }, [myObject])
-  useEffect(() => {
-    console.log(' *** myObject  recap ***', myObject)
-  }, [myObject])
 
-  const offer1 = ['Aucun', 'Compris avec votre pack', '+140€', '+220€']
-  const offer2 = ['Aucun', '+40€', '+150€', '+210€', '+280€']
-  const offer3 = ['Aucun', '+180€', '+350€', '+690€']
+  useEffect(() => {
+    /*  console.log(' *** myObject  recap ***', myObject) */
+  }, [myObject])
 
   return (
     <div className={`${styles.container} App`}>
@@ -203,7 +215,7 @@ const Pack = () => {
                     ]
                   }{' '}
                   (
-                  {offer1?.[myObject?.customPack?.offer1?.length - 1] ||
+                  {getAditionnalOptions(offer1, myObject?.customPack?.offer1) ||
                     'Aucun'}
                   )
                 </p>
@@ -221,7 +233,7 @@ const Pack = () => {
                     ]
                   }{' '}
                   (
-                  {offer2?.[myObject?.customPack?.offer2?.length - 1] ||
+                  {getAditionnalOptions(offer2, myObject?.customPack?.offer2) ||
                     'Aucun'}
                   )
                 </div>
@@ -240,7 +252,9 @@ const Pack = () => {
                     myObject?.customPack?.offer3?.length - 1
                   ]
                 }{' '}
-                ({offer3?.[myObject?.customPack?.offer3?.length - 1] || 'Aucun'}
+                (
+                {getAditionnalOptions(offer3, myObject?.customPack?.offer3) ||
+                  'Aucun'}
                 )
               </div>
             </div>

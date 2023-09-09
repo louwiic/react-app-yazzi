@@ -1,9 +1,12 @@
+import { useOfferContext } from 'context/offerContext'
 import React, { Component } from 'react'
 
 import WheelComponent from 'react-wheel-of-prizes'
 import { Container, Modal, ModalBody, ModalHeader } from 'reactstrap'
 
 export const WheelGame = ({ modalOpen, toggleModal }) => {
+  const { updateMyObject } = useOfferContext()
+
   const segments = [
     'Salon 20 %',
     '3 mois 10%',
@@ -12,6 +15,9 @@ export const WheelGame = ({ modalOpen, toggleModal }) => {
   ]
   const segColors = ['#DFB693', '#255866', '#DFB693', '#255866']
   const onFinished = (winner) => {
+    updateMyObject({
+      wheelGains: winner,
+    })
     console.log(winner)
   }
   return (
@@ -35,7 +41,7 @@ export const WheelGame = ({ modalOpen, toggleModal }) => {
             fontSize: 56,
           }}
         >
-          Tentez votre change ! 🍀
+          Tentez votre chance ! 🍀
         </h3>
       </ModalHeader>
 
