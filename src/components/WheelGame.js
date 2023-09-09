@@ -122,8 +122,16 @@ export const WheelGame = ({ modalOpen, toggleModal, setModalOpen }) => {
     }
   }
 
-  const segments = ['-5%', '-10%', '-15%', '-30%']
-  const segColors = ['#c62828', '#ffffff', '#c62828', '#ffffff']
+  const segments = ['-5%', '-10%', '-15%', '-30%', '-15%', '-5%', '-10%']
+  const segColors = [
+    '#cf3030',
+    '#e58432',
+    '#d2d456',
+    '#9ccf57',
+    '#88bbf7',
+    '#e58432',
+    '#d2d456',
+  ]
   const onFinished = (winner) => {
     updateMyObject({
       wheelGains: winner,
@@ -162,16 +170,16 @@ export const WheelGame = ({ modalOpen, toggleModal, setModalOpen }) => {
                 marginBlock: 10,
               }}
             >
-              Tournez la roue pour découvrir votre lot !
+              Tourner la roue pour découvrir votre lot !
             </h4>
             <WheelComponent
               segments={segments}
               segColors={segColors}
               winningSegment="won 10"
               onFinished={(winner) => onFinished(winner)}
-              primaryColor="#616161"
-              contrastColor="#000000"
-              buttonText="Tourner"
+              primaryColor="#160723"
+              contrastColor="#ffffff"
+              buttonText=" "
               isOnlyOnce={false}
               size={290}
               upDuration={500}

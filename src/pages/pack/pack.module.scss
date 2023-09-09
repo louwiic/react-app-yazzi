@@ -176,3 +176,20 @@
   font-size: 18px;
   margin-left: 10px;
 }
+
+.iconContainer {
+  height: 48px;
+  width: 48px;
+  background-color: #255866;
+  border-radius: 8px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.icontext {
+  font-family: 'Poppins', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  margin-top: 16px;
+}
