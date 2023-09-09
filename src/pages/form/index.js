@@ -123,12 +123,14 @@ const Pack = () => {
   }
 
   const handleSubmit = async (e) => {
+    const regexDate = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/
+
     e.preventDefault()
     formData.genre = selectedGender
 
     const newErrors = {}
 
-    if (!myObject?.pack?.name || !myObject?.templateName) {
+    /* if (!myObject?.pack?.name || !myObject?.templateName) {
       setMessageAlert(
         'Vous devez choisir un pack et un template avant de continuer',
       )
@@ -140,7 +142,7 @@ const Pack = () => {
       }, 2500)
       return
     }
-
+ */
     if (!formData.lastname) {
       newErrors.lastname = 'Le champ nom est requis.'
     }
@@ -158,6 +160,10 @@ const Pack = () => {
     }
     if (!formData.dateMaried) {
       newErrors.dateMaried = 'Le champ date du mariage est requis.'
+    }
+    if (regexDate.test(formData.dateMaried) === false) {
+      newErrors.dateMaried =
+        'Le champ date du mariage doit être dans le format jour/mois/année par exemple 02/10/2025.'
     }
 
     if (Object.keys(newErrors).length === 0) {
@@ -241,7 +247,7 @@ const Pack = () => {
                   display: 'flex',
                 }}
               >
-                <FormGroup tag="fieldset" className="row">
+                {/*  <FormGroup tag="fieldset" className="row">
                   <FormGroup
                     check
                     style={{
@@ -287,7 +293,7 @@ const Pack = () => {
                       Monsieur
                     </Label>
                   </FormGroup>
-                </FormGroup>
+                </FormGroup> */}
 
                 <div
                   style={{
@@ -419,7 +425,7 @@ const Pack = () => {
                     type="text"
                     name="dateMaried"
                     id="dateMaried"
-                    placeholder="Date de votre mariage"
+                    placeholder="Ex : 20/02/2024"
                     value={formData.dateMaried}
                     onChange={handleChange}
                     className={styles.input}
@@ -442,16 +448,16 @@ const Pack = () => {
                   type="submit"
                   className={styles.mybutton}
                 >
-                  Être rappelé par nos équipes
+                  Recevoir mon estimation
                 </Button>
-                <Button
+                {/* <Button
                   color="primary"
                   type="button"
                   onClick={() => history.push(path.recap)}
                   className={styles.mybutton}
                 >
                   Recap test
-                </Button>
+                </Button> */}
               </Form>
               <div style={{ paddingBottom: 48 }}>
                 <p className={styles.textForm}>
