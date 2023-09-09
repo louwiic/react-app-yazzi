@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { CSVLink } from 'react-csv'
+import { WheelGame } from 'components/WheelGame'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom'
 import { path } from 'utils/const'
 import { useOfferContext } from 'context/offerContext'
@@ -97,6 +97,10 @@ const Pack = () => {
   const offer1 = ['Aucun', 'Compris avec votre pack', 140, 220]
   const offer2 = ['Aucun', 40, 150, 210, 280]
   const offer3 = ['Aucun', 180, 350, 690]
+  const [modalOpen, setModalOpen] = useState(false)
+  const toggleModal = () => {
+    setModalOpen(!modalOpen)
+  }
 
   const getAditionnalOptions = (offer, pack) => {
     const content =
@@ -267,6 +271,32 @@ const Pack = () => {
           }}
         />
       </Container>
+      <div
+        onClick={() => setModalOpen(!modalOpen)}
+        className={styles.wheelcontainer}
+      >
+        <div>
+          <img
+            src={images.jackpot}
+            alt="img_heart"
+            style={{
+              height: 88,
+              width: 77,
+            }}
+          />
+        </div>
+        <div style={{ marginLeft: 32 }}>
+          <p className={styles.wheeltitle}>Tourner la roue</p>
+          <p className={styles.wheelsubtitle}>
+            Tenter de gagner <br /> jusqu’à -20% sur votre site !
+          </p>
+        </div>
+      </div>
+      <WheelGame
+        modalOpen={modalOpen}
+        toggleModal={toggleModal}
+        setModalOpen={setModalOpen}
+      />
     </div>
   )
 }
