@@ -252,6 +252,31 @@ const Pack = () => {
       <div className={styles.containertitle}>
         <h1 className={styles.titlebloc}>Sélectionnez votre pack</h1>
       </div>
+      <div style={{ display: 'flex', marginTop: 30 }}>
+        <div>
+          <div className={styles.iconContainer}>
+            <span>💛</span>
+          </div>
+          <p className={styles.icontext}>
+            Suivez les réponses de vos <br /> invités en temps réel
+          </p>
+        </div>
+        <div style={{ marginLeft: 32 }}>
+          <div className={styles.iconContainer}>
+            <span>♻️</span>
+          </div>
+          <p className={styles.icontext}>Plus écologique & économique</p>
+        </div>
+        <div style={{ marginLeft: 32 }}>
+          <div className={styles.iconContainer}>
+            <span>🖥</span>
+          </div>
+          <p className={styles.icontext}>
+            Les informations de votre <br /> événement sont centralisées <br />{' '}
+            dans un seul et même endroit
+          </p>
+        </div>
+      </div>
 
       <Form history={history} updateMyObject={updateMyObject} />
     </div>

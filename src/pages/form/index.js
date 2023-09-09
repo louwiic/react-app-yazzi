@@ -423,33 +423,6 @@ const Pack = () => {
                     </div>
                   )}
                 </FormGroup>
-                <FormGroup
-                  check
-                  style={{
-                    marginBlock: 18,
-                  }}
-                >
-                  <Label check>
-                    <Input
-                      type="checkbox"
-                      checked={noDate}
-                      onChange={handleCheckboxChange}
-                      style={{
-                        width: 18,
-                        height: 18,
-                      }}
-                    />
-                    <span
-                      style={{
-                        color: 'white',
-                        fontSize: 18,
-                        marginLeft: 10,
-                      }}
-                    >
-                      Je n'ai pas encore de date
-                    </span>
-                  </Label>
-                </FormGroup>
                 <FormGroup>
                   <Label for="dateMaried" className="text-white">
                     Date de l'évènement
@@ -475,6 +448,34 @@ const Pack = () => {
                       {errors.dateMaried}
                     </div>
                   )}
+                </FormGroup>
+                <FormGroup
+                  check
+                  style={{
+                    marginTop: 10,
+                    marginBottom: 16,
+                  }}
+                >
+                  <Label check>
+                    <Input
+                      type="checkbox"
+                      checked={noDate}
+                      onChange={handleCheckboxChange}
+                      style={{
+                        width: 18,
+                        height: 18,
+                      }}
+                    />
+                    <span
+                      style={{
+                        color: 'white',
+                        fontSize: 18,
+                        marginLeft: 10,
+                      }}
+                    >
+                      Je n'ai pas encore de date
+                    </span>
+                  </Label>
                 </FormGroup>
                 <Button
                   color="primary"

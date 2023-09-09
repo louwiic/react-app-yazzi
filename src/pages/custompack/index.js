@@ -37,7 +37,7 @@ const Back = ({ history }) => {
           fontSize: '22px',
           fontWeight: '400',
           lineHeight: '29.7px',
-          marginTop: '80px',
+          marginTop: 30,
           fontFamily: "'Poppins', 'Arial Narrow', Arial, sans-serif",
         }}
       >
