@@ -31,10 +31,13 @@ const ButtonView = ({
   )
 }
 
-const ButtonShow = ({ text, onClick }) => {
+const ButtonShow = ({ title, text, onClick }) => {
   return (
     <button onClick={onClick} className={styles.mybuttonshow} type="button">
-      <img src={images.eye} alt="eye" />
+      <div>
+        <img src={images.eye} alt="eye" />
+        <span style={{ marginLeft: 10 }}>Voir {title}</span>
+      </div>
     </button>
   )
 }
@@ -183,7 +186,7 @@ const Template = () => {
 
     handleClosePreview()
     window.scrollTo({
-      top: 0,
+      top: -40,
       behavior: 'smooth',
     })
     setTimeout(() => {
@@ -239,121 +242,145 @@ const Template = () => {
       <div className={styles.flower}>
         <img src={images.leaf} alt="eye" />
       </div>
+
       {showPreview && (
         <>
-          <Row>
-            <Col md={9}>
-              {showPreview && <PreviewWindow url={previewUrl} />}
-            </Col>
-            <Col md={3}>
-              <span className={styles.titlepreview}>
-                Nos autres <br /> templates
-              </span>
-
-              <div
+          <div>
+            <div className="d-flex flex-direction-row align-items-center">
+              <button
+                type="button"
                 onClick={() => {
-                  setTemplateChoosed('rosaly')
-                  handleOpenPreview('rosaly')
+                  history.goBack()
                 }}
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  marginTop: 32,
-                  ...selectStyle,
-                }}
+                className={styles.back2}
               >
-                <img src={images.mockuprosaly} alt="img_heart" />
-                <ButtonShow
-                  text="Changer de template"
+                <img src={images.arrowback} alt="arrowback" />
+              </button>
+              <span className={styles.titlepreview}>
+                Découvrez nos autres templates
+              </span>
+            </div>
+
+            <Row>
+              <Col md={3}>
+                <div
                   onClick={() => {
                     setTemplateChoosed('rosaly')
                     handleOpenPreview('rosaly')
                   }}
-                  link=""
-                />
-              </div>
-              <div
-                onClick={() => {
-                  setTemplateChoosed('sky')
-                  handleOpenPreview('sky', 2)
-                }}
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  marginTop: 40,
-                  ...selectStyleSky,
-                }}
-              >
-                <img src={images.mockeupsky1} alt="img_heart" />
-                <ButtonShow
-                  text="Changer de template"
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    marginTop: 32,
+                    ...selectStyle,
+                  }}
+                >
+                  <img src={images.mockuprosaly} alt="img_heart" />
+                  <ButtonShow
+                    text="Changer de template"
+                    onClick={() => {
+                      setTemplateChoosed('rosaly')
+                      handleOpenPreview('rosaly')
+                    }}
+                    title="rosaly"
+                    link=""
+                  />
+                </div>
+              </Col>
+              <Col md={3}>
+                <div
                   onClick={() => {
                     setTemplateChoosed('sky')
                     handleOpenPreview('sky', 2)
                   }}
-                  link=""
-                />
-              </div>
-              <div
-                onClick={() => {
-                  setTemplateChoosed('naturaly')
-                  handleOpenPreview('naturaly', 2)
-                }}
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  marginTop: 40,
-                  ...selectStyleNat,
-                }}
-              >
-                <img src={images.mockupnaturally1} alt="img_heart" />
-                <ButtonShow
-                  text="Changer de template"
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    marginTop: 40,
+                    ...selectStyleSky,
+                  }}
+                >
+                  <img src={images.mockeupsky1} alt="img_heart" />
+                  <ButtonShow
+                    text="Changer de template"
+                    onClick={() => {
+                      setTemplateChoosed('sky')
+                      handleOpenPreview('sky', 2)
+                    }}
+                    title="sky"
+                    link=""
+                  />
+                </div>
+              </Col>
+              <Col md={3}>
+                <div
                   onClick={() => {
                     setTemplateChoosed('naturaly')
                     handleOpenPreview('naturaly', 2)
                   }}
-                  link=""
-                />
-              </div>
-              <div
-                onClick={() => {
-                  setTemplateChoosed('golden')
-                  handleOpenPreview('golden')
-                }}
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  marginTop: 40,
-                  ...selectStyleGol,
-                }}
-              >
-                <img src={images.mockupgolden1} alt="img_heart" />
-                <ButtonShow
-                  text="Changer de template"
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    marginTop: 40,
+                    ...selectStyleNat,
+                  }}
+                >
+                  <img src={images.mockupnaturally1} alt="img_heart" />
+                  <ButtonShow
+                    text="Changer de template"
+                    onClick={() => {
+                      setTemplateChoosed('naturaly')
+                      handleOpenPreview('naturaly', 2)
+                    }}
+                    title="naturaly"
+                    link=""
+                  />
+                </div>
+              </Col>
+              <Col md={3}>
+                <div
                   onClick={() => {
                     setTemplateChoosed('golden')
                     handleOpenPreview('golden')
                   }}
-                  link=""
-                />
-              </div>
-              <div
-                style={{
-                  display: 'flex',
-                }}
-              >
-                <ButtonView
-                  onClick={handleSelectTemplate}
-                  link="https://yazzievent.com/template-rosaly/"
-                  text={`Choisir ce  template`}
-                  showIcon={false}
-                  className={styles.buttonView}
-                  textStyle={styles.buttontextChoice}
-                />
-              </div>
-            </Col>
-          </Row>
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    marginTop: 40,
+                    ...selectStyleGol,
+                  }}
+                >
+                  <img src={images.mockupgolden1} alt="img_heart" />
+                  <ButtonShow
+                    text="Changer de template"
+                    onClick={() => {
+                      setTemplateChoosed('golden')
+                      handleOpenPreview('golden')
+                    }}
+                    title="golden"
+                    link=""
+                  />
+                </div>
+              </Col>
+              <Col md={3}>
+                <div
+                  style={{
+                    display: 'flex',
+                  }}
+                >
+                  <ButtonView
+                    onClick={handleSelectTemplate}
+                    link="https://yazzievent.com/template-rosaly/"
+                    text={`Choisir ce  template`}
+                    showIcon={false}
+                    className={styles.buttonView}
+                    textStyle={styles.buttontextChoice}
+                  />
+                </div>
+              </Col>
+            </Row>
+          </div>
+          {showPreview && <PreviewWindow url={previewUrl} />}
         </>
       )}
 

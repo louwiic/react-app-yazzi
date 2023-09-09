@@ -31,6 +31,8 @@
   line-height: 54px;
   margin-top: 20px;
   margin-bottom: 20px;
+  display: flex;
+  margin-left: 30px;
 }
 
 .containertitle {
@@ -62,6 +64,16 @@
   justify-content: center;
   height: 70px;
   width: 70px;
+  background-color: #00908a;
+  border-radius: 16px;
+}
+
+.back2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 50px;
   background-color: #00908a;
   border-radius: 16px;
 }
@@ -177,8 +189,10 @@
 }
 
 .mybuttonshow {
-  width: 40px;
-  height: 40px;
+  /*   width: 40px; */
+  padding-inline: 10px;
+  padding-block: 10px;
+  /*  height: 40px; */
   border-radius: 16px;
   display: flex;
   flex-direction: column;
@@ -193,7 +207,7 @@
   align-self: flex-end;
   color: white;
   margin-right: 10px;
-  margin-top: -80px;
+  margin-top: -60px;
 }
 
 .buttontext {

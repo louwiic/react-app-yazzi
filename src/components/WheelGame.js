@@ -5,15 +5,8 @@ import WheelComponent from 'react-wheel-of-prizes'
 import { Container, Modal, ModalBody, ModalHeader } from 'reactstrap'
 
 export const WheelGame = ({ modalOpen, toggleModal }) => {
-  const { updateMyObject } = useOfferContext()
-
-  const segments = [
-    'Salon 20 %',
-    '3 mois 10%',
-    'roue fortune 5%',
-    'roue fortune 30%',
-  ]
-  const segColors = ['#DFB693', '#255866', '#DFB693', '#255866']
+  const segments = ['-5%', '-10%', '-15%', '-30%']
+  const segColors = ['#c62828', '#fafafa', '#c62828', '#fafafa']
   const onFinished = (winner) => {
     updateMyObject({
       wheelGains: winner,
