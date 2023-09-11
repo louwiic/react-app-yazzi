@@ -57,7 +57,7 @@ const Dashboard = () => {
                 type="button"
               >
                 <span className={styles.buttontext}>
-                  Et si on se disait oui ?
+                  Recevez votre estimation ?
                 </span>
               </button>
               <div className={styles.arrowContainer}>
@@ -103,8 +103,8 @@ const Dashboard = () => {
           <div style={{ marginLeft: 32 }}>
             <p className={styles.wheeltitle}>Tournez la roue</p>
             <p className={styles.wheelsubtitle}>
-              Tentez de gagner <br /> jusqu’à -30% sur votre faire-parts
-              digitaux !
+              Tentez de gagner <br /> jusqu’à -30% sur votre faire-parts digital
+              !
             </p>
           </div>
         </div>

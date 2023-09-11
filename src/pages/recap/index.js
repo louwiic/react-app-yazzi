@@ -288,8 +288,7 @@ const Pack = () => {
         <div style={{ marginLeft: 32 }}>
           <p className={styles.wheeltitle}>Tournez la roue</p>
           <p className={styles.wheelsubtitle}>
-            Tentez de gagner <br /> jusqu’à -30% sur votre faire-parts digitaux
-            !
+            Tentez de gagner <br /> jusqu’à -30% sur votre faire-parts digital !
           </p>
         </div>
       </div>
